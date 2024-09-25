@@ -13,15 +13,7 @@ Frameworks and Tools Used:
 - Server: NodeJs with supporting libraries
 - Database: MySQL
 
-### GIT conventions
-
-- branch name [TASKID] name of feature / bugfix
-- commint name [TASKID] comment on task
-- merge request [TASKID] globals information of new feature / bugfix
-
 ### Souces and help
-
-
 
 How to indent in VScode <br />
 On Windows Shift + Alt + F <br />
