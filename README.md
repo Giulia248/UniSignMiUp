@@ -19,3 +19,6 @@ How to indent in VScode <br />
 On Windows Shift + Alt + F <br />
 On Mac Shift + Option + F <br />
 On Ubuntu Ctrl + Shift + I
+
+HTTP REST sources 
+https://code.tutsplus.com/it/a-beginners-guide-to-http-and-rest--net-16340t
