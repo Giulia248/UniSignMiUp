@@ -1,4 +1,58 @@
-ciao giulia
-ciao giulia
-ciao giulia
-oggi lavoriamo
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>UniSignMiUp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="http://127.0.0.1:5501/features\login\login.css">
+    <link rel="icon" type="image/x-icon" href="http://127.0.0.1:5501/resources/assets/logo.ico">
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form id="formRegister" >
+                <h1>Crea un Account</h1>
+                <input type="text" placeholder="Name and Surname" name="nome", id="nomeRegistration">
+                <input type="email" placeholder="Email" name="email", id="emailRegistration">
+                <input type="password" placeholder="Password" name="password", id="passwordRegistration">
+                <button type="submit" id="signUp">Registrati</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form>
+                <h1>Autenticazione</h1>
+                <input type="email" placeholder="Email", id="emailLogin">
+                <input type="password" placeholder="Password" id="passwordLogin">
+                <a href="http://127.0.0.1:5501/features/login/resetpassword.html">Password Dimenticata?</a>
+                <button id="signIn">Accedi</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Bentornato!</h1>
+                    <p>Accedi con le tue credenziali per usufruire di tutti i servizi</p>
+                    <button class="hidden" id="login">Accedi</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>UniBookMi</h1>
+                    <h3>Università Degli Studi Di Milano</h3>
+                    <p>Crea un'Account</p>
+                    <button class="hidden" id="register">Registrati</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- script always goes under all html code-->
+    
+    <div>
+        <script src="http://127.0.0.1:5501/features\login\login.js"></script>
+    </div>
+</body>
+
+</html>
