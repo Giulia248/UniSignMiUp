@@ -26,7 +26,7 @@
       </div>
 
       <div class="search">
-        <input class="srch" type="search" name="" placeholder="Type To text">
+        <input class="srch" type="search" name="" placeholder="type">
         <a href="#"> <button class="btn">Search</button></a>
       </div>
 
@@ -34,19 +34,44 @@
     <div class="content">
       <h1>Benvenuto in <br><span>UniSignMiUp</span> <br>Iscriviti agli Esami Qui !</h1>
       <p class="par">Gestisci facilmente le tue iscrizioni agli esami e <br> consulta il calendario aggiornato!<br>
-        Inizia subito a pianificare il tuo percorso accademico! <br> Clicca sul tasto iscriviti per visualizzare gli appelli d'esame<br>
+        Inizia subito a pianificare il tuo percorso accademico! <br> <br> Clicca sul tasto iscriviti per visualizzare gli appelli d'esame<br>
         e procedere con l'iscrizione!
        
       </p>
 
       <button class="cn"><a href="http://127.0.0.1:5501/features\Iscriviti\iscriviti.html">Iscriviti</a></button>
 
-      <div class="form">
-        <h2>Feedback</h2><br>
-        <p class="feedback-text">Una volta iscritto all'esame,<br>fornisci il tuo feedback per migliorare l'esperienza!</p><br><br><br>
-        <button class="btnn"><a href="http://127.0.0.1:5501/features\login\login.html">Logout</a></button>
-      </div>
+      <div class="contact-form">
+        <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+            <h3>Una volta iscritto all'esame, <br> lascia un Feedback!</h3>
+            
+            <div class="input-box">
+                <input type="hidden" name="access_key" value="13505794-69ef-46d2-8438-92553938ed8a">
+            </div>
 
+            <div class="input-box">
+                <input type = "text" name="Name" required placeholder="Name">
+            </div>
+            
+            <div class="input-box">
+                <input type = "email" name="Email" required placeholder="Email">
+            </div>
+            
+            <div class="input-box">
+                <textarea name="message" required placeholder="Scrivi il tuo feedback qui!"></textarea>
+            </div>
+            
+            <div class="input-box">
+                <input type="submit" value="Invia">
+            </div>
+
+            <div class="input-box">
+              <input type="button" value="Logout" onclick="window.location.href='http://127.0.0.1:5501/features/login/login.html'">
+          </div>
+          
+        </form>
+    </div> 
+    
     </div>
   </div>
   </div>

@@ -116,7 +116,7 @@ ul li a:hover{
     width: 1200px;
     height: auto;
     margin: auto;
-    color: #000;
+    color: beige ;
     position: relative;
     font-size: 25px;
 }
@@ -158,7 +158,7 @@ ul li a:hover{
 }
 
 .cn:hover{
-    background-color: black;
+    background-color: beige;
 }
 
 .content span{
@@ -263,4 +263,92 @@ ul li a:hover{
 }
 .icons ion-icon:hover{
     color: #800020;
+}
+
+.contact-form {
+    background-color: #800020; /* Sfondo beige */
+    padding: 40px;
+    width: 20%; /* Rimpiccioliamo il form per farlo stare di lato */
+    padding-bottom: 20px;
+    padding-top: 20px;
+    float: right; /* Posiziona il form sulla destra */
+    margin-top: -400px; /* Sposta il form verso l'alto */
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+  
+  .contact-form h2 {
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .contact-form .input-box {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .contact-form .input-box input,
+  .contact-form .input-box textarea{
+    width: 100%;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid white;
+    outline: none;
+    resize: none;
+    background: transparent;
+  }
+  
+  .contact-form .input-box span {
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    pointer-events: none;
+    transition: 0.5s;
+    color: #666;
+  }
+  
+  .contact-form .input-box input:focus ~ span,
+  .contact-form .input-box textarea:focus ~ span{
+    color: #e91e63;
+    font-size: 12px;
+    transform: translateY(-20px);
+  }
+  
+  .contact-form .input-box input[type="submit"] {
+    width: 100%;
+    background: transparent; /* Background trasparente */
+    color: #fff; /* Colore testo bianco */
+    border: 2px solid white; /* Bordi bianchi */
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+    transition: 0.5s;
+}
+  
+.contact-form .input-box input[type="submit"]:hover {
+    background: beige;
+    color: black; /* Cambia colore testo al passaggio del mouse */
+}
+
+.contact-form .input-box input[type="button"] {
+    width: 100%;
+    background: transparent;
+    color: #fff;
+    border: 2px solid beige;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+    transition: 0.5s;
+}
+
+.contact-form .input-box input[type="button"]:hover {
+    background: white;
+    color: black;
 }
