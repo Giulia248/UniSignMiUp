@@ -13,7 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('http://127.0.0.1:5501\resources\assets\uni.jpg');
+  background-image: url('http://127.0.0.1:5501/resources/assets/uni.jpg');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -50,14 +50,14 @@ section {
 }
 
 .section-header h2 {
-  color: #FFF;
+  color: beige;
   font-weight: bold;
   font-size: 3em;
   margin-bottom: 20px;
 }
 
 .section-header p {
-  color: #FFF;
+  color: beige;
 }
 
 .row  {
@@ -79,7 +79,7 @@ section {
 .contact-info-icon {
   height: 70px;
   width: 70px;
-  background-color: #fff;
+  background-color: #800020; /* Modificato */
   text-align: center;
   border-radius: 50%;
 }
@@ -87,6 +87,7 @@ section {
 .contact-info-icon i {
   font-size: 30px;
   line-height: 70px;
+  color: beige; /* Modificato */
 }
 
 .contact-info-content {
@@ -94,7 +95,7 @@ section {
 }
 
 .contact-info-content h4 {
-  color: #1da9c0;
+  color: #800020; /* Modificato */
   font-size: 1.4em;
   margin-bottom: 5px;
 }
@@ -105,18 +106,19 @@ section {
 }
 
 .contact-form {
-  background-color: #fff;
+  background-color: #800020;
   padding: 40px;
   width: 45%;
   padding-bottom: 20px;
   padding-top: 20px;
+  border: 2px solid #800020; /* Modificato */
 }
 
 .contact-form h2 {
   font-weight: bold;
   font-size: 2em;
   margin-bottom: 10px;
-  color: #333;
+  color: beige; /* Modificato */
 }
 
 .contact-form .input-box {
@@ -132,46 +134,46 @@ section {
   font-size: 16px;
   margin: 10px 0;
   border: none;
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid hsl(345, 100%, 25%); /* Modificato */
   outline: none;
   resize: none;
-}
-
-.contact-form .input-box span {
-  position: absolute;
-  left: 0;
-  padding: 5px 0;
-  font-size: 16px;
-  margin: 10px 0;
-  pointer-events: none;
-  transition: 0.5s;
-  color: #666;
+  background-color: transparent;
+  color: black;
+  border-bottom: 2px solid beige;
 }
 
 .contact-form .input-box input:focus ~ span,
 .contact-form .input-box textarea:focus ~ span{
-  color: #e91e63;
+  color: #800020; /* Modificato */
   font-size: 12px;
   transform: translateY(-20px);
 }
 
-.contact-form .input-box input[type="submit"]
-{
+.contact-form .input-box input::placeholder,
+.contact-form .input-box textarea::placeholder {
+    color: black; /* Placeholder in nero */
+}
+
+.contact-form .input-box input:focus,
+.contact-form .input-box textarea:focus {
+    border-bottom: 2px solid beige; /* Cambia colore bordo al focus */
+}
+
+.contact-form .input-box input[type="submit"] {
   width: 100%;
-  background: #00bcd4;
+  background: #800020; /* Modificato */
   color: #FFF;
   border: none;
   cursor: pointer;
   padding: 10px;
   font-size: 18px;
-  border: 1px solid #00bcd4;
+  border: 1px solid beige; /* Modificato */
   transition: 0.5s;
 }
 
-.contact-form .input-box input[type="submit"]:hover
-{
-  background: #FFF;
-  color: #00bcd4;
+.contact-form .input-box input[type="submit"]:hover {
+  background: beige;
+  color: #800020; /* Modificato */
 }
 
 @media (max-width: 991px) {
@@ -193,3 +195,67 @@ section {
     width: 100%;
   }
 }
+
+.send-btn {
+  display: block;
+  width: 100%;
+  background: #800020; /* Colore del bottone "Send" */
+  color: #FFF;
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid beige; /* Bordo beige */
+  transition: 0.5s;
+  text-decoration: none;
+}
+
+.send-btn:hover {
+  background: beige;
+  color: #800020; /* Cambia colore al passaggio del mouse */
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  70% {
+    transform: translateX(10%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  70% {
+    transform: translateX(-10%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.section-header, .send-btn {
+  animation: slide-in-left 1.5s ease-out;
+}
+
+.contact-info {
+  animation: slide-in-left 1.5s ease-out;
+}
+
+.contact-form {
+  animation: slide-in-right 1.5s ease-out;
+}
+
+/* Aggiungiamo una piccola transizione per enfatizzare l'arrivo */
+.contact-info, .contact-form, .section-header, .send-btn {
+  transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+}
+

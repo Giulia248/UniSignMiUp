@@ -14,23 +14,20 @@
 <body>
   
   <section>
-    
     <div class="section-header">
       <div class="container">
-        <h2><img src="http://127.0.0.1:5501/resources\assets\contactsIcon.jpg" alt="icon" style="height: 50px;"> Contattaci</h2>
-        <h3>Abbiamo le risposte che cerchi e siamo pronti ad ascoltarti. Contattaci oggi stesso e trasforma le tue domande in soluzioni.</h3>
+        <h2>Contattaci !</h2>
+        <h3 style="color: beige;">Abbiamo le risposte che cerchi e siamo pronti ad ascoltarti. <br>Contattaci oggi stesso e trasforma le tue domande in soluzioni.</h3> <!-- Colore beige -->
       </div>
     </div>
     
     <div class="container">
       <div class="row">
-        
         <div class="contact-info">
           <div class="contact-info-item">
             <div class="contact-info-icon">
               <i class="fas fa-home"></i>
             </div>
-            
             <div class="contact-info-content">
               <h4>Indirizzo:</h4>
               <p>Via Festa del Perdono 7,<br/> 20122 Milano, <br/>Italia</p>
@@ -41,7 +38,6 @@
             <div class="contact-info-icon">
               <i class="fas fa-phone"></i>
             </div>
-            
             <div class="contact-info-content">
               <h4>Telefono:</h4>
               <p>+39 02 5032 5032</p>
@@ -52,46 +48,40 @@
             <div class="contact-info-icon">
               <i class="fas fa-envelope"></i>
             </div>
-            
             <div class="contact-info-content">
               <h4>Email</h4>
-             <p> unimi@postecert.it</p>
+              <p> unimi@postecert.it</p>
             </div>
           </div>
         </div>
         
         <div class="contact-form">
-            <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+          <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
             <h2>Mandaci un Messaggio!</h2>
-            
             <div class="input-box">
-                <input type="hidden" name="access_key" value="13505794-69ef-46d2-8438-92553938ed8a">
-              </div>
-
-            <div class="input-box">
-              <input type = "text" name="Name" required placeholder="Name">
-            </div>
-            
-            <div class="input-box">
-                <input type = "email" name="Email" required placeholder="Email">
-            </div>
-            
-            <div class="input-box">
-                <textarea name="message" required placeholder="Type your message..."></textarea>
-            </div>
-            
-            <div class="input-box">
-                <input type="submit" value="Send">
+              <input type="hidden" name="access_key" value="13505794-69ef-46d2-8438-92553938ed8a">
             </div>
             <div class="input-box">
-                <a href="http://127.0.0.1:5501/features\homepage\homepage.html" class="btn btn-primary d-block w-100">Ritorna alla Homepage</a>
+              <input type="text" name="Nome" required placeholder="Name">
             </div>
+            <div class="input-box">
+              <input type="email" name="Email" required placeholder="Email">
+            </div>
+            <div class="input-box">
+              <textarea name="message" required placeholder="Scrivi il tuo messaggio qui..."></textarea>
+            </div>
+            <div class="input-box">
+              <input type="submit" value="invia">
+            </div>
+            <div class="input-box">
+              <a href="http://127.0.0.1:5501/features/homepage/homepage.html" class="send-btn">Ritorna alla Homepage</a>
+          </div>
           </form>
         </div>
-        
       </div>
     </div>
   </section>
+  
   
 </body>
 </html>

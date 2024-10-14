@@ -352,3 +352,41 @@ ul li a:hover{
     background: white;
     color: black;
 }
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    80% {
+        transform: translateX(10%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    80% {
+        transform: translateX(-10%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.content h1,
+.content .par,
+.content .cn {
+    animation: slideInLeft 1.5s ease-out;
+}
+
+.contact-form {
+    animation: slideInRight 1.5s ease-out;
+}
