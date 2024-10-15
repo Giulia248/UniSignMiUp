@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>UniSignMiUp - Iscriviti All'esame</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://127.0.0.1:5501/features/Iscriviti/iscriviti.css">
+        <link rel="icon" type="image/x-icon" href="http://127.0.0.1:5501/resources/assets/logo.ico">
+    </head>
+    <body>
+        <section class="banner">
+            <h2>ISCRIVITI ALL'ESAME QUI!</h2>
+            <div class="card-container">
+                <div class="card-img"></div>
+
+                <div class="card-content">
+                    <h3>Iscrizione</h3>
+                    <form>
+
+                        <div class="form-row">
+                            <input type="number" id="exam-id" placeholder="Inserisci ID esame" required>
+                        </div>
+
+                        <div class="form-row">
+                            <input type="email" id="email" placeholder="Inserisci email" required>
+                        </div>
+
+                        <div class="form-row">
+                            <select id="exam-name">
+                                <option value="">Seleziona Esame</option>
+                                <option value="italiano">Italiano</option>
+                                <option value="storia">Storia</option>
+                                <option value="mate">Matematica</option>
+                                <option value="geometria">Geometria</option>
+                                <option value="scienze">Scienze</option>
+                                <option value="inglese">Inglese</option>
+                                <option value="spagnolo">Spagnolo</option>
+                                <option value="motoria">Motoria</option>
+                                <option value="continuo">Continuo</option>
+                                <option value="discreto">Discreto</option>
+                                <option value="programmazione">Programmazione</option>
+                                <option value="forensics">Forensics</option>
+                                <option value="basi">Basi di Dati</option>
+                                <option value="orientate-ai-servizi">Orientate ai Servizi</option>
+                                <option value="stage-finale">Stage Finale</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <select id="location">
+                                <option value="Seleziona il luogo">Seleziona il luogo</option>
+                                <option value="via-celoria-20">Via Celoria 20</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="date-select"></label>
+                            <select id="date-select">
+                                <option value="" disabled selected>Seleziona una data</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label for="time-select"></label>
+                            <select id="time-select">
+                                <option value="" disabled selected>Seleziona un orario</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <select id="degree-course">
+                                <option value="Seleziona Facoltà">Seleziona Facoltà</option>
+                                <option value="sicurezza">Sicurezza dei Sistemi e delle Reti Informatiche</option>
+                                <option value="sicurezza-online">Sicurezza dei Sistemi e delle Reti Informatiche ONLINE</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <input type="button" id="bookButton" value="Prenota Esame">
+                        </div>
+
+                        <div class="form-row">
+                            <input type="button" id="homeButton" value="Torna alla Home">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="http://127.0.0.1:5501/features/Iscriviti/iscriviti.js"></script>
+    </body>
+</html>
