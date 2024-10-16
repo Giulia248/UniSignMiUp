@@ -1,32 +1,19 @@
-
 var checkActiveState = true;
 document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('container');
     const registerBtn = document.getElementById('register');
     const loginBtn = document.getElementById('login');
 
-
-
-
     // REGISTER
     registerBtn.addEventListener('click', () => {
-
-        //if is the first time "register" has been clicked
         if (checkActiveState) {
             container.classList.add("active");
             checkActiveState = false;
         }
-
     });
-
 
     document.getElementById("signUp").addEventListener("click", function (event) {
         event.preventDefault();
-
-        // just for test
-        // window.location.href = 'http://127.0.0.1:5500/features/home/index.html';
-        //return;
-        //
 
         // Validazione campi di input
         const nameInput = document.querySelector('.sign-up input[placeholder="Name and Surname"]');
@@ -51,13 +38,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         };
 
-        const emailValue = emailInput.value.trim()
-        if (!(emailValue.includes("unimi.it"))){
+        const emailValue = emailInput.value.trim();
+        if (!(emailValue.includes("unimi.it"))) {
             alert("Inserire un indirizzo email unimi (unimi.it).");
             return;
         }
-
-
 
         var formData = {
             email: document.getElementById("emailRegistration").value,
@@ -65,14 +50,12 @@ document.addEventListener('DOMContentLoaded', function () {
             password: document.getElementById("passwordRegistration").value
         };
 
-
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(formData),
-
         };
 
         fetch('http://localhost:3000/addUser', options)
@@ -80,12 +63,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!data.ok) {
                     alert("Errore nella registrazione");
                     throw Error(data.status);
-                };
-                window.location.href = 'http://127.0.0.1:5500/features/home/index.html';
+                }
+                // Reindirizzamento alla homepage
+                window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html';
                 return data.json();
             });
-
-            
     });
 
     // LOG IN --------------------------------------------------------------------
@@ -96,11 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("signIn").addEventListener("click", function (event) {
         event.preventDefault();
-
-        // just for test
-        // window.location.href = 'http://127.0.0.1:5500/features/home/index.html';
-        // return;
-        //
 
         // Validazione campi di input
         const emailInput = document.querySelector('.sign-in input[placeholder="Email"]');
@@ -118,14 +95,14 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const emailValue = emailInput.value.trim()
-        if (!(emailValue.includes("unimi.it"))){
+        const emailValue = emailInput.value.trim();
+        if (!(emailValue.includes("unimi.it"))) {
             alert("Inserire un indirizzo email unimi (unimi.it).");
             return;
         }
 
-            email =  document.getElementById("emailLogin").value,
-            password = document.getElementById("passwordLogin").value
+        const email = document.getElementById("emailLogin").value;
+        const password = document.getElementById("passwordLogin").value;
 
         const options = {
             method: 'GET',
@@ -139,21 +116,20 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(`http://localhost:3000/getUser?email=${email}&password=${encodedPassword}`, options)
         .then(response => {
             if (!response.ok) {
-
-                if (response.status == 401){
+                if (response.status == 401) {
                     alert("password errata");
                     return;
-                }else if (response.status == 500){
+                } else if (response.status == 500) {
                     alert("Email non valida o non registrata");
                     return;
                 }
-            }else{
-                window.location.href = 'http://127.0.0.1:5500/features/home/index.html';
+            } else {
+                // Reindirizzamento alla homepage
+                window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html';
             }
-           
-          })
-          .catch(error => {
+        })
+        .catch(error => {
             console.error('C`è stato un problema:', error);
-          });
+        });
     });
 });
