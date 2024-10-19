@@ -6,19 +6,21 @@ const examController = require('../models/examController');
 
 // USERS
 
-// Get all users
+// GET all users
 router.get('/UniSignMeUp/v1/getAllUsers', userController.getAllUsers);
 
-// Create a new user
+// POST a new user
 router.post('/UniSignMeUp/v1/createUser', userController.createUser);
 
 
 //EXAM
 
-// Get all exams
+// GET all exams
 router.get('/UniSignMeUp/v1/getAllExams', examController.getAllExams);
 
-// Create a new exam
+// POST a new exam
 router.post('/UniSignMeUp/v1/createExam', examController.createExam);
 
 module.exports = router;
+
+

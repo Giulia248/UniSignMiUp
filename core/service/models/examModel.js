@@ -2,7 +2,7 @@ const db = require('../database');
 
 // Get all exams
 exports.getAllExams = async () => {
-    const [rows] = await db.query('SELECT * FROM exams');
+    const [rows] = await db.query('SELECT * FROM exam');
     return rows;
 };
 

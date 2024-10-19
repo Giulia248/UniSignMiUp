@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +11,26 @@
             margin: 20px;
             padding: 0;
         }
+
         .container {
             max-width: 600px;
             margin: 0 auto;
         }
+
         textarea {
             width: 100%;
             height: 100px;
             margin-bottom: 10px;
         }
-        input, select, button {
+
+        input,
+        select,
+        button {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
         }
+
         .result {
             background-color: #f9f9f9;
             padding: 10px;
@@ -33,10 +40,19 @@
         }
     </style>
 </head>
-<body>
+
+<body onload="uniLog('pagina caricata con successo', false);">
     <div class="container">
         <h1>REST API Tester</h1>
-        
+
+        <p> headers che si utilizzano di solito: <br> 
+            { 'Content-Type': 'application/json', } <br>
+            http://localhost:2024/UniSignMeUp/v1/... <br>
+
+
+
+        </p>
+
         <label for="url">API URL</label>
         <input type="text" id="url" placeholder="Enter API URL" />
 
@@ -45,7 +61,7 @@
             <option value="GET">GET</option>
             <option value="POST">POST</option>
             <option value="PUT">PUT</option>
-            <option value="PATCH">PATCH</option>
+            <option value="OPTIONS">OPTIONS</option>
             <option value="DELETE">DELETE</option>
         </select>
 
@@ -63,6 +79,11 @@
 
     <script>
         async function sendRequest() {
+
+
+
+            var error = "";
+           
             const url = document.getElementById('url').value;
             const method = document.getElementById('method').value;
             const headersInput = document.getElementById('headers').value;
@@ -70,9 +91,12 @@
 
             let headers = {};
             try {
-                headers = headersInput ? JSON.parse(headersInput) : {};
+                headers =  {
+                    'Content-Type': 'application/json' // Set appropriate headers
+                }
             } catch (e) {
                 document.getElementById('response').textContent = 'Invalid Headers JSON format';
+
                 return;
             }
 
@@ -94,10 +118,19 @@
                 });
                 const responseData = await response.text();
                 document.getElementById('response').textContent = `Status: ${response.status}\n\n${responseData}`;
+                uniLog(`Status: ${response.status}\n${responseData}`, true);
+
             } catch (error) {
                 document.getElementById('response').textContent = `Error: ${error.message}`;
+                uniLog(`unilog Error: ${error.message}`, true);
             }
+
         }
+
     </script>
-</body>
+
+
+<script src="http://127.0.0.1:5500/core/config/GlobalConfigurations.js"></script>
+</body >
+
 </html>
