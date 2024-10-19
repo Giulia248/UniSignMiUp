@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://127.0.0.1:5501/features/Iscriviti/iscriviti.css">
         <link rel="icon" type="image/x-icon" href="http://127.0.0.1:5501/resources/assets/logo.ico">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     </head>
     <body>
         <section class="banner">
@@ -19,11 +20,7 @@
                     <form>
 
                         <div class="form-row">
-                            <input type="number" id="exam-id" placeholder="Inserisci ID esame" required>
-                        </div>
-
-                        <div class="form-row">
-                            <input type="email" id="email" placeholder="Inserisci email" required>
+                            <input type="email" id="email" placeholder="Inserisci email" disabled>
                         </div>
 
                         <div class="form-row">
@@ -73,14 +70,6 @@
                             <label for="time-select"></label>
                             <select id="time-select">
                                 <option value="" disabled selected>Seleziona un orario</option>
-                            </select>
-                        </div>
-
-                        <div class="form-row">
-                            <select id="degree-course">
-                                <option value="Seleziona Facoltà">Seleziona Facoltà</option>
-                                <option value="sicurezza">Sicurezza dei Sistemi e delle Reti Informatiche</option>
-                                <option value="sicurezza-online">Sicurezza dei Sistemi e delle Reti Informatiche ONLINE</option>
                             </select>
                         </div>
 

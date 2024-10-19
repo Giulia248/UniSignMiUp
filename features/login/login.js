@@ -12,63 +12,73 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.getElementById("signUp").addEventListener("click", function (event) {
-        event.preventDefault();
-
-        // Validazione campi di input
-        const nameInput = document.querySelector('.sign-up input[placeholder="Name and Surname"]');
-        const emailInput = document.querySelector('.sign-up input[placeholder="Email"]');
-        const passwordInput = document.querySelector('.sign-up input[placeholder="Password"]');
-
-        if (nameInput.value.trim() === '' || emailInput.value.trim() === '' || passwordInput.value.trim() === '') {
-            alert("Compilare tutti i campi.");
-            return;
-        }
-
-        // Controllo lunghezza della password solo durante la registrazione
-        if (passwordInput.value.trim().length < 6) {
-            alert("La password deve contenere almeno 6 caratteri.");
-            return;
-        }
-
-        // Controllo validità dell'indirizzo email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailInput.value.trim())) {
-            alert("Inserire un indirizzo email valido.");
-            return;
-        };
-
-        const emailValue = emailInput.value.trim();
-        if (!(emailValue.includes("unimi.it"))) {
-            alert("Inserire un indirizzo email unimi (unimi.it).");
-            return;
-        }
-
-        var formData = {
-            email: document.getElementById("emailRegistration").value,
-            nome: document.getElementById("nomeRegistration").value,
-            password: document.getElementById("passwordRegistration").value
-        };
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        };
-
-        fetch('http://localhost:3000/addUser', options)
-            .then(data => {
-                if (!data.ok) {
-                    alert("Errore nella registrazione");
-                    throw Error(data.status);
-                }
-                // Reindirizzamento alla homepage
-                window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html';
-                return data.json();
-            });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById("signUp").addEventListener("click", function (event) {
+            event.preventDefault();
+    
+            // Validazione campi di input
+            const nomeInput = document.getElementById('nomeRegistration');
+            const cognomeInput = document.getElementById('cognomeRegistration');
+            const emailInput = document.getElementById('emailRegistration');
+            const passwordInput = document.getElementById('passwordRegistration');
+            const facoltaInput = document.getElementById('facoltaRegistration');
+            const matricolaInput = document.getElementById('matricolaRegistration');
+    
+            if (nomeInput.value.trim() === '' || cognomeInput.value.trim() === '' || emailInput.value.trim() === '' || passwordInput.value.trim() === '' || matricolaInput.value.trim() === '') {
+                alert("Compilare tutti i campi.");
+                return;
+            }
+    
+            if (passwordInput.value.trim().length < 6) {
+                alert("La password deve contenere almeno 6 caratteri.");
+                return;
+            }
+    
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value.trim())) {
+                alert("Inserire un indirizzo email valido.");
+                return;
+            }
+    
+            if (!(emailInput.value.trim().includes("unimi.it"))) {
+                alert("Inserire un indirizzo email unimi (unimi.it).");
+                return;
+            }
+    
+            if (facoltaInput.value === '') {
+                alert("Selezionare una facoltà.");
+                return;
+            }
+    
+            var formData = {
+                nome: nomeInput.value,
+                cognome: cognomeInput.value,
+                email: emailInput.value,
+                password: passwordInput.value,
+                facolta: facoltaInput.value,
+                matricola: matricolaInput.value
+            };
+    
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            };
+    
+            fetch('http://localhost:3000/addUser', options)
+                .then(data => {
+                    if (!data.ok) {
+                        alert("Errore nella registrazione");
+                        throw Error(data.status);
+                    }
+                    window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html';
+                    return data.json();
+                });
+        });
     });
+    
 
     // LOG IN --------------------------------------------------------------------
     loginBtn.addEventListener('click', () => {

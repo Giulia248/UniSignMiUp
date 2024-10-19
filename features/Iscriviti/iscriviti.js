@@ -117,6 +117,9 @@ $(function () {
         }
     };
 
+    const userEmail = "utente@example.com";  // Questo valore sarà dinamico, proveniente dal sistema di login
+    $('#email').val(userEmail);
+
     $('#exam-name').on('change', function () {
         const selectedExam = $(this).val();
         const dateSelect = $('#date-select');
@@ -146,26 +149,48 @@ $(function () {
         }
     });
 
+    // Funzione per generare il PDF
+    function generatePDF(exam, date, time, location, email) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.text("Dettagli Prenotazione Esame", 10, 10);
+        doc.text(`Esame: ${exam}`, 10, 20);
+        doc.text(`Data: ${date}`, 10, 30);
+        doc.text(`Orario: ${time}`, 10, 40);
+        doc.text(`Luogo: ${location}`, 10, 50);
+        doc.text(`Email: ${email}`, 10, 60);
+
+        doc.save(`Prenotazione_${exam}_${date}.pdf`);
+    }
+
     $('#bookButton').on('click', function () {
-        const examId = $('#exam-id').val();
-        const email = $('#email').val();
         const selectedExam = $('#exam-name').val();
         const selectedDate = $('#date-select').val();
         const selectedTime = $('#time-select').val();
-        const selectedLocation = $('#location').val();
-        const selectedDegreeCourse = $('#degree-course').val();
+        const location = $('#location').val();  // Aggiungi il campo del luogo
+        const userEmail = $('#email').val();
+        
+        if (selectedExam && selectedDate && selectedTime && location) {
+            // Mostra la conferma
+            const confirmMessage = `Vuoi confermare l'iscrizione all'esame ${selectedExam}?`;
+            const confirmed = confirm(confirmMessage);
 
-        if (examId && email && selectedExam && selectedDate && selectedTime) {
-            
-            alert(`Esame prenotato!\nID Esame: ${examId}\nMateria: ${selectedExam}\nData: ${selectedDate}\nOrario: ${selectedTime}\nLuogo: ${selectedLocation}\nFacoltà: ${selectedDegreeCourse}\n`);
+            if (confirmed) {
+                alert("Esame prenotato!");
+                
+                // Genera il PDF con i dettagli dell'esame prenotato
+                generatePDF(selectedExam, selectedDate, selectedTime, location, userEmail);
 
-            $('#exam-id').val('');
-            $('#email').val('');
-            $('#exam-name').val('');
-            $('#location').val('Seleziona il luogo'); // Reimposta il selettore del luogo
-            $('#date-select').empty().append('<option value="" disabled selected>Seleziona una data</option>');
-            $('#time-select').empty().append('<option value="" disabled selected>Seleziona un orario</option>');
-            $('#degree-course').val('Seleziona Facoltà');
+                // Reset campi
+                $('#exam-name').val('');
+                $('#location').val('Seleziona il luogo');
+                $('#date-select').empty().append('<option value="" disabled selected>Seleziona una data</option>');
+                $('#time-select').empty().append('<option value="" disabled selected>Seleziona un orario</option>');
+            } else {
+                // Mantiene i dati scelti se l'utente sceglie "No"
+                alert("Puoi ancora modificare i dati.");
+            }
         } else {
             alert('Per favore, compila tutti i campi richiesti.');
         }

@@ -14,11 +14,29 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form id="formRegister" >
+            <form id="formRegister">
                 <h1>Crea un Account</h1>
-                <input type="text" placeholder="Name and Surname" name="nome", id="nomeRegistration">
-                <input type="email" placeholder="Email" name="email", id="emailRegistration">
-                <input type="password" placeholder="Password" name="password", id="passwordRegistration">
+                <input type="text" placeholder="Nome" name="nome" id="nomeRegistration">
+                <input type="text" placeholder="Cognome" name="cognome" id="cognomeRegistration">
+                <input type="email" placeholder="Email" name="email" id="emailRegistration">
+                <input type="password" placeholder="Password" name="password" id="passwordRegistration">
+        
+                <!-- Menù a tendina per la facoltà -->
+                <select id="facoltaRegistration" name="facolta">
+                    <option value="">Seleziona la Facoltà</option>
+                    <option value="Sicurezza delle reti e dei sistemi informatici">Sicurezza delle reti e dei sistemi informatici</option>
+                    <option value="Sicurezza delle reti e dei sistemi informatici online">Sicurezza delle reti e dei sistemi informatici online</option>
+                    <option value="Letteratura">Letteratura</option>
+                    <option value="Giurisprudenza">Giurisprudenza</option>
+                    <option value="Scienze politiche">Scienze politiche</option>
+                    <option value="Economia e management">Economia e management</option>
+                    <option value="Fisica">Fisica</option>
+                    <option value="Matematica e statistica">Matematica e statistica</option>
+                </select>
+        
+                <!-- Cella Matricola -->
+                <input type="text" placeholder="Matricola" name="matricola" id="matricolaRegistration">
+        
                 <button type="submit" id="signUp">Registrati</button>
             </form>
         </div>
