@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API Tester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        .result {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>REST API Tester</h1>
+        
+        <label for="url">API URL</label>
+        <input type="text" id="url" placeholder="Enter API URL" />
+
+        <label for="method">HTTP Method</label>
+        <select id="method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="PATCH">PATCH</option>
+            <option value="DELETE">DELETE</option>
+        </select>
+
+        <label for="headers">Headers (JSON format)</label>
+        <textarea id="headers" placeholder='{"Content-Type": "application/json"}'></textarea>
+
+        <label for="body">Request Body (JSON format)</label>
+        <textarea id="body" placeholder='{"key": "value"}'></textarea>
+
+        <button onclick="sendRequest()">Send Request</button>
+
+        <h2>Response</h2>
+        <div class="result" id="response"></div>
+    </div>
+
+    <script>
+        async function sendRequest() {
+            const url = document.getElementById('url').value;
+            const method = document.getElementById('method').value;
+            const headersInput = document.getElementById('headers').value;
+            const bodyInput = document.getElementById('body').value;
+
+            let headers = {};
+            try {
+                headers = headersInput ? JSON.parse(headersInput) : {};
+            } catch (e) {
+                document.getElementById('response').textContent = 'Invalid Headers JSON format';
+                return;
+            }
+
+            let body = undefined;
+            try {
+                if (bodyInput && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
+                    body = JSON.stringify(JSON.parse(bodyInput));
+                }
+            } catch (e) {
+                document.getElementById('response').textContent = 'Invalid Body JSON format';
+                return;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    method: method,
+                    headers: headers,
+                    body: body,
+                });
+                const responseData = await response.text();
+                document.getElementById('response').textContent = `Status: ${response.status}\n\n${responseData}`;
+            } catch (error) {
+                document.getElementById('response').textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
