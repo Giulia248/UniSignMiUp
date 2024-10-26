@@ -9,6 +9,9 @@ const examController = require('../models/examController');
 // GET all users
 router.get('/UniSignMeUp/v1/getAllUsers', userController.getAllUsers);
 
+// GET single user
+router.get('/UniSignMeUp/v1/getUser/:userId', userController.getUser);
+
 // POST a new user
 router.post('/UniSignMeUp/v1/createUser', userController.createUser);
 

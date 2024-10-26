@@ -19,3 +19,14 @@ exports.createUser = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+// GET a user
+exports.getUser = async (req, res) => {
+    
+    try {
+        const userId = await userModel.getUser(req.body);
+        res.status(201).json({ id: userId });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
