@@ -52,7 +52,8 @@
             { 'Content-Type': 'application/json', } <br>
             http://localhost:2024/UniSignMeUp/v1/
             http://localhost:2024/UniSignMeUp/v1/createUser
-            http://localhost:2024/UniSignMeUp/v1/getUser/1?email=c&password=cd
+            http://localhost:2024/UniSignMeUp/v1/getUser?email=c&password=cd
+
             <br>
             {
 
@@ -106,7 +107,7 @@
 
             var error = "";
            
-            const url = document.getElementById('url').value;
+            var url = document.getElementById('url').value;
             const method = document.getElementById('method').value;
             const headersInput = document.getElementById('headers').value;
             const bodyInput = document.getElementById('body').value;
@@ -124,11 +125,16 @@
 
             // let body = undefined;
             try {
+                console.log("mothod", method);
                 if (bodyInput && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
                     body = JSON.stringify(JSON.parse(bodyInput));
+                } 
+                 if (method === 'GET'){
+                    
+                    body = undefined;
                 }
             } catch (e) {
-                document.getElementById('response').textContent = 'Invalid Body JSON format';
+                document.getElementById('response').textContent = e.message;
                 return;
             }
 

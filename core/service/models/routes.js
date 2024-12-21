@@ -9,11 +9,17 @@ const examController = require('../models/examController');
 // GET all users
 router.get('/UniSignMeUp/v1/getAllUsers', userController.getAllUsers);
 
-// GET single user
-router.get('/UniSignMeUp/v1/getUser/:userId', userController.getUser);
-
 // POST a new user
 router.post('/UniSignMeUp/v1/createUser', userController.createUser);
+
+// GET single user
+router.get('/UniSignMeUp/v1/getUser', userController.getUser);
+
+// PUT change user pw
+// router.put('/UniSignMeUp/v1/changePassword', userController.changePassword);
+
+// DELETE user
+// router.post('/UniSignMeUp/v1/deleteUser', userController.deleteUser);
 
 
 //EXAM

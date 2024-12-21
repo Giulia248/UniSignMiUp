@@ -16,38 +16,35 @@ exports.createUser = async (userData) => {
         [studentId, email, password, name, surname, course]);
 
     console.log("[Console] createUser", result.insertId);
-    return result.insertId;
+    return { success: true };
 };
 
 // GET single user
 exports.getUser = async (userData) => {
     
-    
-    const email = userData.params.email
-    const password = userData.params.password;
+    console.log("[Console] getUser started ...");
+    const email = userData.email
+    const password = userData.password;
     
     const sql = `SELECT * FROM user WHERE email = ?`;
-    await db.query(sql, [email], (err, result) => {
-        if (err) {
-            console.log("[Console] createUser model  err", err)
-            throw err;
-        } else {
-            if (result.length === 0) {
-                console.log("[Console] createUser model  result === 0")
-                return;
-            }
-            const passwordUser = result[0].password;
 
-            if (passwordUser === password) {
-                console.log("[Console] createUser model  200", result.email)
-                return result.email
-                return res.status(200).json({ message: 'Login successful' });
-            } else {
-                console.log("[Console] createUser model  401", result.insertId)
-                return result.insertId
-                return res.status(401).json({ message: 'Invalid password' });
-            }
-        };
-    });
+    const [result] = await db.query(sql, [email]);
+
+
+    if   (!result || result.length === 0 ){
+        return { success: false };
+    } else {
+        
+    const passwordUser = result[0].password;
+    if (passwordUser === password) {
+
+        return { success: true };
+    } else {
+
+        return { success: false };
+    }
+    }
+
+    
 };
 

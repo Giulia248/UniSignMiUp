@@ -14,9 +14,22 @@ exports.getAllUsers = async (req, res) => {
 exports.createUser = async (req, res) => {
     try {
         console.log("[Console] Received data:", req.body); // Log to check request body
-        const userId = await userModel.createUser(req.body);
-        res.status(200).json({ id: userId });
+        const result = await userModel.createUser(req.body);
+
+        if (result.success) {
+            // Send success response with a message
+            console.log("✨ [Console] createUser successfull");
+            return res.status(200).json({ message: 'createUser successful' });
+            
+        } else {
+            // Send failure response if credentials are invalid
+            console.log("✨ [Console] createUser failed");
+            return res.status(401).json({ message: 'ERROR' });
+        }
+        
     } catch (err) {
+        console.log("💀 [Console] createUser failed");
+        console.log(err.message);
         res.status(500).json({ error: err.message });
     }
 };
@@ -25,9 +38,22 @@ exports.createUser = async (req, res) => {
 exports.getUser = async (req, res) => {
     
     try {
-        const userId = await userModel.getUser(req.body);
-        res.status(200).json({ id: userId });
+        console.log("[Console] Received data:", req.query); // Log to check request body
+        const result = await userModel.getUser(req.query);     
+        console.log("[Console] result", result);   
+        if (result.success) {
+            // Send success response with a message
+            console.log("✨ [Console] getUser successfull");
+            return res.status(200).json({ message: 'createUser successful' });
+            
+        } else {
+            // Send failure response if credentials are invalid
+            console.log("💀 [Console] getUser failed");
+            return res.status(401).json({ message: 'ERROR' });
+        }
     } catch (err) {
+        console.log("💀 [Console] getUser failed");
+        console.log(err.message);
         res.status(500).json({ error: err.message });
     }
 };
