@@ -37,9 +37,9 @@ app.listen(port, async () => {
     try {
         // Execute a simple query to check the connection
         const [rows] = await database.query('SELECT 1'); // 'SELECT 1' is a simple query to test connection
-        console.log('Database connection is successful:');
+        console.log('✨ Database connection is successful');
     } catch (error) {
-        console.error('Database connection failed:', error.message);
+        console.error('💀 Database connection failed:', error.message);
     }
 
 

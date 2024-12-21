@@ -5,7 +5,8 @@ var con = mysql.createPool({
     host: "127.0.0.1",
     user: "root",
     password: "statale2024",
-    database: 'unisignmiup'
+    database: "unisignmiup",
+    port: "3306"
 });
 
 

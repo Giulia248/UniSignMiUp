@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the online icon -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5350/5350293.png" type="image/png"> 
     <title>REST API Tester</title>
     <style>
         body {
@@ -48,23 +51,24 @@
         <p> headers che si utilizzano di solito: <br> 
             { 'Content-Type': 'application/json', } <br>
             http://localhost:2024/UniSignMeUp/v1/
-            http://localhost:2024/UniSignMeUp/v1/createUser 
+            http://localhost:2024/UniSignMeUp/v1/createUser
             http://localhost:2024/UniSignMeUp/v1/getUser/1?email=c&password=cd
             <br>
             {
 
-                "name" : "a",   
-                "surname" : "b",
+                createUser
                 "email" : "c",
                 "password" : "cd",
+                "name" : "a",   
+                "surname" : "b",
                 "course" : "e",
-                "studentId" : "123",
+                "studentId" : "123"
                 }
                 <br>
 
                 {
-                    "email" : "c",
-                    "password" : "cd"
+                    "" : "",
+                    "" : ""
                   
                     }
                     <br>
@@ -100,8 +104,6 @@
     <script>
         async function sendRequest() {
 
-
-
             var error = "";
            
             const url = document.getElementById('url').value;
@@ -120,7 +122,7 @@
                 return;
             }
 
-            let body = undefined;
+            // let body = undefined;
             try {
                 if (bodyInput && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
                     body = JSON.stringify(JSON.parse(bodyInput));

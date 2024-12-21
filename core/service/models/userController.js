@@ -13,8 +13,9 @@ exports.getAllUsers = async (req, res) => {
 // Create a new user
 exports.createUser = async (req, res) => {
     try {
+        console.log("[Console] Received data:", req.body); // Log to check request body
         const userId = await userModel.createUser(req.body);
-        res.status(201).json({ id: userId });
+        res.status(200).json({ id: userId });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -25,7 +26,7 @@ exports.getUser = async (req, res) => {
     
     try {
         const userId = await userModel.getUser(req.body);
-        res.status(201).json({ id: userId });
+        res.status(200).json({ id: userId });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

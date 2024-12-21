@@ -8,10 +8,13 @@ exports.getAllUsers = async () => {
 
 // POST Create a new user
 exports.createUser = async (userData) => {
-    const { name, surname, email, password, course, studentId } = userData;
 
-    console.log("[Console] createUser")
-    const [result] = await db.query('INSERT INTO user (name, surname, email, password, course, studentId) VALUES (?, ?, ?, ?, ?, ?)', [name, surname, email, password, course, studentId]);
+    const {email, password, name, surname, course, studentId } = userData;
+
+    console.log("[Console] createUser started ...")
+    const [result] = await db.query('INSERT INTO user (email, password, name, surname, course, studentId) VALUES (?, ?, ?, ?, ?, ?)', 
+        [email, password, name, surname, course, studentId]);
+
     console.log("[Console] createUser", result.insertId);
     return result.insertId;
 };
