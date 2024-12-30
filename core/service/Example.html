@@ -52,26 +52,58 @@
             { 'Content-Type': 'application/json', } <br>
             http://localhost:2024/UniSignMeUp/v1/
             http://localhost:2024/UniSignMeUp/v1/createUser
-            http://localhost:2024/UniSignMeUp/v1/getUser?email=c&password=cd
+            http://localhost:2024/UniSignMeUp/v1/getUser?email=giulia@uni.it&password=cd
+            http://localhost:2024/UniSignMeUp/v1/changePassword
+
+            http://localhost:2024/UniSignMeUp/v1/createExam
+            http://localhost:2024/UniSignMeUp/v1/deleteExam?idexam=1234
 
             <br>
-            {
 
-                createUser
-                "email" : "c",
-                "password" : "cd",
-                "name" : "a",   
-                "surname" : "b",
-                "course" : "e",
+            createUser
+            {
+                "email" : "giulia@uni.it",
+                "password" : "password",
+                "name" : "Giulia",   
+                "surname" : "Floris",
+                "course" : "informatica",
                 "studentId" : "123"
                 }
                 <br>
 
+                changePassword
+                {
+                    "password" : "chiappe",
+                    "email" : "giulia@uni.it"
+                  
+                    }
+                <br>
+
+                <br>
+                createExam
+                {
+                    
+                    "idexam" : "1234",
+                    "studentId" : "studentId",
+                    "examName" : "examName",
+                    "location" : "location",
+                    "dateTime" : "2024-12-30 14:30:00",
+                    "course" : "course"
+                  
+                    }
+
+
+                    <br>
+
+                    
+                <br>
                 {
                     "" : "",
                     "" : ""
                   
                     }
+
+
                     <br>
 
 
@@ -129,7 +161,7 @@
                 if (bodyInput && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
                     body = JSON.stringify(JSON.parse(bodyInput));
                 } 
-                 if (method === 'GET'){
+                 if (method === 'GET' || method === 'DELETE'){
                     
                     body = undefined;
                 }

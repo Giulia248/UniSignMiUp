@@ -1,5 +1,6 @@
 const db = require('../database');
 
+var name = "";
 // GET all users
 exports.getAllUsers = async () => {
     const [rows] = await db.query('SELECT * FROM users');
@@ -38,6 +39,8 @@ exports.getUser = async (userData) => {
     const passwordUser = result[0].password;
     if (passwordUser === password) {
 
+        name = result[0].name
+
         return { success: true };
     } else {
 
@@ -48,3 +51,31 @@ exports.getUser = async (userData) => {
     
 };
 
+
+exports.changePassword = async (userData) => {
+    
+    console.log("[Console] changePassword started ...");
+    const email = userData.email
+    const newPassword = userData.password;
+    
+    const sql = `UPDATE user
+        SET password = ?
+        WHERE email = ?`;
+
+    const [result] = await db.query(sql, [newPassword, email]);
+
+    console.log("[Console] changePassword result ...", result);
+
+    if   (!result || result.affectedRows === 0 ){
+        return { success: false };
+    } else {
+        return { success: true };
+    }
+};
+
+function setName() {
+    return name;
+}
+
+// exports user's data
+module.exports.getData = setName;

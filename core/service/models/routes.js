@@ -16,10 +16,10 @@ router.post('/UniSignMeUp/v1/createUser', userController.createUser);
 router.get('/UniSignMeUp/v1/getUser', userController.getUser);
 
 // PUT change user pw
-// router.put('/UniSignMeUp/v1/changePassword', userController.changePassword);
+router.put('/UniSignMeUp/v1/changePassword', userController.changePassword);
 
 // DELETE user
-// router.post('/UniSignMeUp/v1/deleteUser', userController.deleteUser);
+// router.delete('/UniSignMeUp/v1/deleteUser', userController.deleteUser);
 
 
 //EXAM
@@ -29,6 +29,9 @@ router.get('/UniSignMeUp/v1/getAllExams', examController.getAllExams);
 
 // POST a new exam
 router.post('/UniSignMeUp/v1/createExam', examController.createExam);
+
+// DELETE exam
+router.delete('/UniSignMeUp/v1/deleteExam', examController.deleteExam);
 
 module.exports = router;
 
