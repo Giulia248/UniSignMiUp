@@ -1,13 +1,14 @@
 
 // global configurations 
 
-const environment = "test" // could be "test" - "relase" - "mock"
+const environment = "mock" // could be "test - 1" - "relase - 2" - "mock - 3"
 
 function uniLog(log, urgent) { // log: string - urgent: bool
-
+    const icon = urgent ? "❗️" : "";
     switch (environment) {
+        
         case "test":
-            const icon = urgent ? "❗️" : "";
+            
             console.log("[LOG]", icon, log);
             break;
 
@@ -22,5 +23,14 @@ function uniLog(log, urgent) { // log: string - urgent: bool
         default:
         // code block
         break;
+    }
+}
+
+function getEnvironment() {
+    switch (environment) {
+        case "test": return 1;
+        case "relase": return 2;
+        case "mock": return 3;
+
     }
 }
