@@ -1,5 +1,5 @@
 port 3305 xprotocol port 33060
-pw uniSignMiUp2024
+pw statale2024
 windows service name MySQL80
 connection name UniSignMiUp
 hostname 127.0.0.1

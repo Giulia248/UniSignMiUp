@@ -16,7 +16,7 @@ function uniLog(log, urgent) { // log: string - urgent: bool
             break;
 
         case "mock":
-            console.log("[LOG]", icon, log);
+            console.log("[Mock] [LOG]", icon, log);
             break;
 
         default:

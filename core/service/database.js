@@ -1,13 +1,14 @@
-const mysql = require('mysql2');
-require('dotenv').config();
+const mysql = require('mysql2/promise'); // async \await methods
 
-// Create a connection pool
-const pool = mysql.createPool({
+
+var con = mysql.createPool({
     host: "127.0.0.1",
     user: "root",
-    password: "uniSignMiUp2024",
-    database: "UniSignMiUp"
+    password: "statale2024",
+    database: "unisignmiup",
+    port: "3306"
 });
 
+
 // Export the pool for use in other files
-module.exports = pool.promise();
+module.exports = con

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the online icon -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5350/5350293.png" type="image/png"> 
+    <title>REST API Tester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .result {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body onload="uniLog('pagina caricata con successo', false);">
+    <div class="container">
+        <h1>REST API Tester</h1>
+
+        <p> headers che si utilizzano di solito: <br> 
+            { 'Content-Type': 'application/json', } <br>
+            http://localhost:2024/UniSignMeUp/v1/
+            http://localhost:2024/UniSignMeUp/v1/createUser
+            http://localhost:2024/UniSignMeUp/v1/getUser?email=giulia@uni.it&password=cd
+            http://localhost:2024/UniSignMeUp/v1/changePassword
+
+            http://localhost:2024/UniSignMeUp/v1/createExam
+            http://localhost:2024/UniSignMeUp/v1/deleteExam?idexam=1234
+
+            <br>
+
+            createUser
+            {
+                "email" : "giulia@uni.it",
+                "password" : "password",
+                "name" : "Giulia",   
+                "surname" : "Floris",
+                "course" : "informatica",
+                "studentId" : "123"
+                }
+                <br>
+
+                changePassword
+                {
+                    "password" : "chiappe",
+                    "email" : "giulia@uni.it"
+                  
+                    }
+                <br>
+
+                <br>
+                createExam
+                {
+                    
+                    "idexam" : "1234",
+                    "studentId" : "studentId",
+                    "examName" : "examName",
+                    "location" : "location",
+                    "dateTime" : "2024-12-30 14:30:00",
+                    "course" : "course"
+                  
+                    }
+
+
+                    <br>
+
+                    
+                <br>
+                {
+                    "" : "",
+                    "" : ""
+                  
+                    }
+
+
+                    <br>
+
+
+
+        </p>
+
+        <label for="url">API URL</label>
+        <input type="text" id="url" placeholder="Enter API URL" />
+
+        <label for="method">HTTP Method</label>
+        <select id="method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="OPTIONS">OPTIONS</option>
+            <option value="DELETE">DELETE</option>
+        </select>
+
+        <label for="headers">Headers (JSON format)</label>
+        <textarea id="headers" placeholder='{"Content-Type": "application/json"}'></textarea>
+
+        <label for="body">Request Body (JSON format)</label>
+        <textarea id="body" placeholder='{"key": "value"}'></textarea>
+
+        <button onclick="sendRequest()">Send Request</button>
+
+        <h2>Response</h2>
+        <div class="result" id="response"></div>
+    </div>
+
+    <script>
+        async function sendRequest() {
+
+            var error = "";
+           
+            var url = document.getElementById('url').value;
+            const method = document.getElementById('method').value;
+            const headersInput = document.getElementById('headers').value;
+            const bodyInput = document.getElementById('body').value;
+
+            let headers = {};
+            try {
+                headers =  {
+                    'Content-Type': 'application/json' // Set appropriate headers
+                }
+            } catch (e) {
+                document.getElementById('response').textContent = 'Invalid Headers JSON format';
+
+                return;
+            }
+
+            // let body = undefined;
+            try {
+                console.log("mothod", method);
+                if (bodyInput && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
+                    body = JSON.stringify(JSON.parse(bodyInput));
+                } 
+                 if (method === 'GET' || method === 'DELETE'){
+                    
+                    body = undefined;
+                }
+            } catch (e) {
+                document.getElementById('response').textContent = e.message;
+                return;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    method: method,
+                    headers: headers,
+                    body: body,
+                });
+                const responseData = await response.text();
+                document.getElementById('response').textContent = `Status: ${response.status}\n\n${responseData}`;
+                uniLog(`Status: ${response.status}\n${responseData}`, true);
+
+            } catch (error) {
+                document.getElementById('response').textContent = `Error: ${error.message}`;
+                uniLog(`unilog Error: ${error.message}`, true);
+            }
+
+        }
+
+    </script>
+
+
+<script src="http://127.0.0.1:5500/core/config/GlobalConfigurations.js"></script>
+</body >
+
+</html>
