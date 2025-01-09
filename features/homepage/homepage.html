@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>UniSignMiUp</title>
+  <link rel="stylesheet" href="http://127.0.0.1:5501/features\homepage\homepage.css">
+  <link rel="icon" type="image/x-icon" href="http://127.0.0.1:5501/resources/assets/logo.ico">
+</head>
+
+<body>
+
+  <div class="main">
+    <div class="navbar">
+      <div class="icon">
+        <h2 class="logo">UniSignMiUp</h2>
+      </div>
+
+      <div class="menu">
+        <ul>
+          <li></li><li></li>
+          <li><a href="http://127.0.0.1:5501/features\homepage\homepage.html">HOME</a></li>
+          <li><a href="http://127.0.0.1:5501/features\Dashboard\dashboard.html">DASHBOARD</a></li>
+          <li><a href="http://127.0.0.1:5501/features\Iscriviti\iscriviti.html">ISCRIVITI</a></li>
+          <li><a href="http://127.0.0.1:5501/features\Supporto\supporto.html">SUPPORTO</a></li>
+        </ul>
+      </div>
+
+      <div class="search">
+        <input class="srch" type="search" name="" placeholder="type">
+        <a href="#"> <button class="btn">Search</button></a>
+      </div>
+
+    </div>
+    <div class="content">
+      <h1>Benvenuto in <br><span>UniSignMiUp</span> <br>Iscriviti agli Esami Qui !</h1>
+      <p class="par">Gestisci facilmente le tue iscrizioni agli esami e <br> consulta il calendario aggiornato!<br>
+        Inizia subito a pianificare il tuo percorso accademico! <br> <br> Clicca sul tasto iscriviti per visualizzare gli appelli d'esame<br>
+        e procedere con l'iscrizione!
+       
+      </p>
+
+      <button class="cn"><a href="http://127.0.0.1:5501/features\Iscriviti\iscriviti.html">Iscriviti</a></button>
+
+      <div class="contact-form">
+        <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+            <h3>Una volta iscritto all'esame, <br> lascia un Feedback!</h3>
+            
+            <div class="input-box">
+                <input type="hidden" name="access_key" value="13505794-69ef-46d2-8438-92553938ed8a">
+            </div>
+
+            <div class="input-box">
+                <input type = "text" name="Name" required placeholder="Name">
+            </div>
+            
+            <div class="input-box">
+                <input type = "email" name="Email" required placeholder="Email">
+            </div>
+            
+            <div class="input-box">
+                <textarea name="message" required placeholder="Scrivi il tuo feedback qui!"></textarea>
+            </div>
+            
+            <div class="input-box">
+                <input type="submit" value="Invia">
+            </div>
+
+            <div class="input-box">
+              <input type="button" value="Logout" onclick="window.location.href='http://127.0.0.1:5501/features/login/login.html'">
+          </div>
+          
+        </form>
+    </div> 
+    
+    </div>
+  </div>
+  </div>
+  </div>
+  <script src="http://127.0.0.1:5501/features\homepage\homepage.js"></script>
+</body>
+
+</html>

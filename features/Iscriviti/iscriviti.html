@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>UniSignMiUp - Iscriviti All'esame</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://127.0.0.1:5501/features/Iscriviti/iscriviti.css">
+        <link rel="icon" type="image/x-icon" href="http://127.0.0.1:5501/resources/assets/logo.ico">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    </head>
+    <body>
+        <section class="banner">
+            <h2>ISCRIVITI ALL'ESAME QUI!</h2>
+            <div class="card-container">
+                <div class="card-img"></div>
+
+                <div class="card-content">
+                    <h3>Iscrizione</h3>
+                    <form>
+
+                        <div class="form-row">
+                            <input type="email" id="email" placeholder="Inserisci email" disabled>
+                        </div>
+
+                        <div class="form-row">
+                            <select id="exam-name">
+                                <option value="">Seleziona Esame</option>
+                                <option value="matematica-continua">Matematica del continuo</option>
+                                <option value="matematica-discreta">Matematica del discreto</option>
+                                <option value="programmazione">Programmazione</option>
+                                <option value="architettura">Architettura degli elaboratori</option>
+                                <option value="diritto-penale">Diritto penale dell'informatica</option>
+                                <option value="cybersecurity">Aspetti organizzativi e gestionali della cybersecurity</option>
+                                <option value="web-mobile">Programmazione Web e Mobile</option>
+                                <option value="algoritmi-strutture-dati">Algoritmi e strutture dati</option>
+                                <option value="sistemi-operativi-i">Sistemi Operativi I</option>
+                                <option value="sistemi-operativi-ii">Sistemi Operativi II</option>
+                                <option value="basi-di-dati">Basi di dati</option>
+                                <option value="reti-calcolatori">Reti di calcolatori</option>
+                                <option value="crittografia">Crittografia</option>
+                                <option value="statistica">Statistica e analisi dei dati</option>
+                                <option value="computer-forensics">Computer forensics</option>
+                                <option value="sicurezza-sistemi">Sicurezza dei sistemi e delle reti</option>
+                                <option value="architetture-software">Architetture software orientate ai servizi</option>
+                                <option value="etica-informatica">Aspetti etici, legali, sociali ed economici dell’informatica</option>
+                                <option value="sicurezza-sistemi-informativi">Gestione della sicurezza nei sistemi informativi</option>
+                                <option value="software-sicuro">Progettazione di software sicuro</option>
+                                <option value="sistemi-biometrici">Sistemi biometrici</option>
+                                <option value="sicurezza-web-mobile">Sicurezza dei sistemi Web e Mobili</option>
+                                <option value="stage-finale">Stage Finale</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <select id="location">
+                                <option value="Seleziona il luogo">Seleziona il luogo</option>
+                                <option value="via-celoria-20">Via Celoria 20</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="date-select"></label>
+                            <select id="date-select">
+                                <option value="" disabled selected>Seleziona una data</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label for="time-select"></label>
+                            <select id="time-select">
+                                <option value="" disabled selected>Seleziona un orario</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <input type="button" id="bookButton" value="Prenota Esame">
+                        </div>
+
+                        <div class="form-row">
+                            <input type="button" id="homeButton" value="Torna alla Home">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="http://127.0.0.1:5501/features/Iscriviti/iscriviti.js"></script>
+    </body>
+</html>
