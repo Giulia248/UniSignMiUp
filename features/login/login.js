@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     // LOG IN --------------------------------------------------------------------
+
     loginBtn.addEventListener('click', () => {
         container.classList.remove("active");
         checkActiveState = true;
@@ -142,4 +143,31 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('C`è stato un problema:', error);
         });
     });
+    // Funzione per mostrare/nascondere la password
+    function togglePasswordVisibility(inputId, iconId) {
+        const passwordInput = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+    
+        if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+        } else {
+        passwordInput.type = "password";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+        }
+    }
+    
+    // Eventi per gli icone degli occhi
+    document.getElementById('eyeRegistration').addEventListener('click', () => {
+        togglePasswordVisibility('passwordRegistration', 'eyeRegistration');
+    });
+    
+    document.getElementById('eyeLogin').addEventListener('click', () => {
+        togglePasswordVisibility('passwordLogin', 'eyeLogin');
+    });
+    
 });
+
+
