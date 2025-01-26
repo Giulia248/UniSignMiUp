@@ -16,64 +16,60 @@ const options = {
 
 if (getEnvironment() === 3) { // MOCK
 
-  
+
   uniLog("getInfo")
-  setTimeout(() => {  
+  setTimeout(() => {
 
-fetch("http://127.0.0.1:5501/core/service/models/mock/user.json")
-.then(res => res.json())
-.then(responseJson => {
-  // Access the JSON data and update HTML content
-  document.getElementById('nome').innerText = responseJson.name;
-  document.getElementById('email').innerText = responseJson.email;
-})
+    fetch("http://127.0.0.1:5501/core/service/models/mock/user.json")
+      .then(res => res.json())
+      .then(responseJson => {
+        // Access the JSON data and update HTML content
+        document.getElementById('nome').innerText = responseJson.name;
+        document.getElementById('email').innerText = responseJson.email;
+      })
 
-   }, 2500);
+  }, 2500);
 
 } else {
 
-fetch("http://localhost:3000/getInfo", options)
-  .then(response => response.json())
-  .then(responseJson => {
-    // Access the JSON data and update HTML content
-    document.getElementById('name').innerText = responseJson.name;
-    document.getElementById('email').innerText = responseJson.email;
-  })
-  .catch(error => console.error('Error fetching data:', error));
+
+    uniLog("localstorage");
+    uniLog(localStorage.getItem("name"));
+    document.getElementById('name').innerText = localStorage.getItem("name");
+    document.getElementById('email').innerText = localStorage.getItem("email");
 
 
-  
 
 };
 
 if (getEnvironment() === 3) {
-  setTimeout(() => {  
+  setTimeout(() => {
 
     fetch("http://127.0.0.1:5501/core/service/models/mock/getReservations.json")
-    .then(res => res.json())
-    .then(responseJson => {
+      .then(res => res.json())
+      .then(responseJson => {
 
-      const roomList = document.getElementById('roomList');
-  
-      // Clear existing content
-      roomList.innerHTML = '';
-  
-      // Loop through each object in the JSON data array
-      responseJson.forEach(item => {
-  
-        // Create list item element
-        const listItem = document.createElement('li');
-  
-        const date = new Date(item.dateTime);
-  
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
-        const year = date.getFullYear();
-  
-        const formattedDate = `${day}-${month}-${year}`;
-  
-        // Populate list item with JSON data
-        listItem.innerHTML = `
+        const roomList = document.getElementById('roomList');
+
+        // Clear existing content
+        roomList.innerHTML = '';
+
+        // Loop through each object in the JSON data array
+        responseJson.forEach(item => {
+
+          // Create list item element
+          const listItem = document.createElement('li');
+
+          const date = new Date(item.dateTime);
+
+          const day = date.getDate().toString().padStart(2, '0');
+          const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+          const year = date.getFullYear();
+
+          const formattedDate = `${day}-${month}-${year}`;
+
+          // Populate list item with JSON data
+          listItem.innerHTML = `
               <strong>Esame:</strong> <span>${item.examName}</span><br>
               <strong>Corso di Studi:</strong> <span>${item.course}</span><br>
               <strong>Sede:</strong> <span>${item.location}</span><br>
@@ -81,28 +77,28 @@ if (getEnvironment() === 3) {
               <input type="button" id="roomListBtn" class="roomListBtn ${item.idExam}" value="Cancella prenotazione">
               
           `;
-  
-        // Append list item to the room list
-        roomList.appendChild(listItem);
-  
-        document.querySelectorAll(".roomListBtn").forEach(button => {
-          console.log(button.classList);
-  
-          if (button.classList[1] === `${item.idExam}`) {
-            button.addEventListener("click", function (event) {
-              event.preventDefault();
-              deleteReservation(item.idExam);
-              return;
-            });
-          }
-  
+
+          // Append list item to the room list
+          roomList.appendChild(listItem);
+
+          document.querySelectorAll(".roomListBtn").forEach(button => {
+            console.log(button.classList);
+
+            if (button.classList[1] === `${item.idExam}`) {
+              button.addEventListener("click", function (event) {
+                event.preventDefault();
+                deleteReservation(item.idExam);
+                return;
+              });
+            }
+
+          });
+
         });
-  
-      });
-  
-    })
-  
-  
+
+      })
+
+
   }, 2500);
 }
 else {

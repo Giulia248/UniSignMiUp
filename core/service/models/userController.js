@@ -45,9 +45,11 @@ exports.getUser = async (req, res) => {
         if (result.success) {
             // Send success response with a message
             console.log("✨ [Console] getUser successfull");
-            const name = userModel.getData();
-            console.log("NOME", name);
-            return res.status(200).json({ message: 'getUser successful' });
+            const userData = userModel.getData();
+            console.log("NOME", userData);
+
+            return res.status(200).json({ studentId: userData.studentId, email : userData.email, 
+                name: userData.name, surname: userData.surname, course: userData.course});
             
         } else {
             // Send failure response if credentials are invalid
@@ -60,7 +62,6 @@ exports.getUser = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
-
 
 // PUT new password
 exports.changePassword = async (req, res) => {

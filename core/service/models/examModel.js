@@ -1,13 +1,22 @@
 const db = require('../database');
 
 // Get all exams
-exports.getAllExams = async () => {
-    const [rows] = await db.query('SELECT * FROM exam');
-    return rows;
+exports.getAllExams = async (examData) => {
+    const studentId = examData
+    const [rows] = await db.query('SELECT * FROM exam WHERE studentId = ?');
+
+    if   (!result || result.affectedRows === 0 ){
+        return rows;
+    } else {
+        return rows;
+    }
 };
+
+
 
 // POST a new exam
 exports.createExam = async (examData) => {
+
 
     const {idexam, studentId, examName, location, dateTime, course} = examData;
 

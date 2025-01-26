@@ -60,12 +60,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             var formData = {
-                nome: nomeInput.value,
-                cognome: cognomeInput.value,
+                name: nomeInput.value,
+                surname: cognomeInput.value,
                 email: emailInput.value,
                 password: passwordInput.value,
-                facolta: facoltaInput.value,
-                matricola: matricolaInput.value
+                course: facoltaInput.value,
+                studentId: matricolaInput.value
             };
 
             const options = {
@@ -77,12 +77,14 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
              
-                fetch('http://localhost:3000/addUser', options)
+                fetch('http://localhost:2024/UniSignMeUp/v1/createUser', options)
                     .then(data => {
                         if (!data.ok) {
                             alert("Errore nella registrazione");
                             throw Error(data.status);
                         }
+
+
                         window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html';
                         return data.json();
                     });
@@ -142,17 +144,25 @@ document.addEventListener('DOMContentLoaded', function () {
             
         } else {
 
-            fetch(`http://localhost:3000/getUser?email=${email}&password=${password}`, options)
-                .then(response => {
-                    if (!response.ok) {
-                        if (response.status == 401) {
+            fetch(`http://localhost:2024/UniSignMeUp/v1/getUser?email=${email}&password=${password}`, options)
+            .then(response => response.json())
+            .then(responseJson => {
+                    if (!responseJson.name === "" || responseJson.name === null ) {
+                        alert(responseJson.status);
+                        if (responseJson.status == 401) {
                             alert("password errata");
                             return;
-                        } else if (response.status == 500) {
+                        } else if (responseJson.status == 500) {
                             alert("Email non valida o non registrata");
                             return;
                         }
                     } else {
+                        
+                        localStorage.setItem('studentId', responseJson.studentId);
+                        localStorage.setItem('email', responseJson.email);
+                        localStorage.setItem('name', responseJson.name);
+                        localStorage.setItem('surname', responseJson.surname);
+                        localStorage.setItem('course', responseJson.course);
                         // Reindirizzamento alla homepage
                         window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html';
                     }

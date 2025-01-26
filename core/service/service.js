@@ -12,7 +12,7 @@ const database = require('./database');
 const app = express();
 
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', // Allow only this origin
+    origin: 'http://127.0.0.1:5501', // Allow only this origin
     methods: ['GET', 'OPTIONS', 'POST', 'DELETE', 'PUT'], // Allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers
   }));

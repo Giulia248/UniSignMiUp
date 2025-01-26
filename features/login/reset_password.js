@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const options = {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         };
 
-        fetch('http://localhost:3000/modifyPassword', options)
+        fetch('http://localhost:2024/UniSignMeUp/v1/changePassword', options)
             .then(data => {
                 if (!data.ok) {
                     alert("Errore nel cambio password");
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Ritorna alla pagina di login dopo un certo periodo di tempo
                 setTimeout(function () {
-                    window.location.href = 'http://127.0.0.1:5500/features/login/login.html';
+                    window.location.href = 'http://127.0.0.1:5501/features/login/login.html';
                 }, 3000); // Ritorna alla pagina di login dopo 3 secondi
             });
     });

@@ -1,7 +1,7 @@
 
 // global configurations 
 
-const environment = "mock" // could be "test - 1" - "relase - 2" - "mock - 3"
+const environment = "test" // could be "test - 1" - "relase - 2" - "mock - 3"
 
 function uniLog(log, urgent) { // log: string - urgent: bool
     const icon = urgent ? "❗️" : "";

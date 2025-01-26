@@ -117,7 +117,7 @@ $(function () {
         }
     };
 
-    const userEmail = "utente@example.com";  // Questo valore sarà dinamico, proveniente dal sistema di login
+    const userEmail = localStorage.getItem("email")
     $('#email').val(userEmail);
 
     $('#exam-name').on('change', function () {
@@ -170,24 +170,58 @@ $(function () {
         const selectedTime = $('#time-select').val();
         const location = $('#location').val();  // Aggiungi il campo del luogo
         const userEmail = $('#email').val();
-        
+
         if (selectedExam && selectedDate && selectedTime && location) {
             // Mostra la conferma
             const confirmMessage = `Vuoi confermare l'iscrizione all'esame ${selectedExam}?`;
             const confirmed = confirm(confirmMessage);
 
             if (confirmed) {
-                alert("Esame prenotato!");
                 
-                // Genera il PDF con i dettagli dell'esame prenotato
-                generatePDF(selectedExam, selectedDate, selectedTime, location, userEmail);
+               
 
-                // Reset campi
-                $('#exam-name').val('');
-                $('#location').val('Seleziona il luogo');
-                $('#date-select').empty().append('<option value="" disabled selected>Seleziona una data</option>');
-                $('#time-select').empty().append('<option value="" disabled selected>Seleziona un orario</option>');
+                const idExam = localStorage.getItem("studentId") + selectedExam.length + selectedDate.length + selectedTime.length
+                const dateTime =  selectedDate + " " + selectedTime;
+                
+
+                var formData = {
+                    idexam: idExam,
+                    studentId: localStorage.getItem("studentId"),
+                    examName: selectedExam,
+                    location: location,
+                    dateTime: dateTime,
+                    course: localStorage.getItem("course")
+                };
+
+                uniLog("form data")
+                uniLog(formData)
+
+                const options = {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                  };
+
+                fetch("http://localhost:2024/UniSignMeUp/v1/createExam", options)
+                    .then(response => {
+                        if (response.status === 200) {
+                            alert("Esame prenotato!");
+
+                            // Genera il PDF con i dettagli dell'esame prenotato
+                            generatePDF(selectedExam, selectedDate, selectedTime, location, userEmail);
+            
+                            // Reset campi
+                            $('#exam-name').val('');
+                            $('#location').val('Seleziona il luogo');
+                            $('#date-select').empty().append('<option value="" disabled selected>Seleziona una data</option>');
+                            $('#time-select').empty().append('<option value="" disabled selected>Seleziona un orario</option>');
+                        };
+                     });
+
             } else {
+                uniLog("Not confirmed")
                 // Mantiene i dati scelti se l'utente sceglie "No"
                 alert("Puoi ancora modificare i dati.");
             }
