@@ -177,13 +177,10 @@ $(function () {
             const confirmed = confirm(confirmMessage);
 
             if (confirmed) {
-                
-               
 
-                const idExam = localStorage.getItem("studentId") + selectedExam.length + selectedDate.length + selectedTime.length
+                const idExam = localStorage.getItem("studentId") + selectedExam.length;
                 const dateTime =  selectedDate + " " + selectedTime;
                 
-
                 var formData = {
                     idexam: idExam,
                     studentId: localStorage.getItem("studentId"),

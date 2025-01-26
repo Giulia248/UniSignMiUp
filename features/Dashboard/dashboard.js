@@ -31,15 +31,11 @@ if (getEnvironment() === 3) { // MOCK
   }, 2500);
 
 } else {
-
-
     uniLog("localstorage");
     uniLog(localStorage.getItem("name"));
     document.getElementById('name').innerText = localStorage.getItem("name");
     document.getElementById('email').innerText = localStorage.getItem("email");
-
-
-
+    document.getElementById('course').innerText = localStorage.getItem("course");
 };
 
 if (getEnvironment() === 3) {
@@ -103,7 +99,7 @@ if (getEnvironment() === 3) {
 }
 else {
 // reservations
-fetch("http://localhost:3000/getReservations", options)
+fetch(`http://localhost:2024/UniSignMeUp/v1/getExams?studentId=${localStorage.getItem("studentId")}`, options)
 
   .then(response => response.json())
   .then(responseJson => {
@@ -111,29 +107,45 @@ fetch("http://localhost:3000/getReservations", options)
     const roomList = document.getElementById('roomList');
 
     // Clear existing content
+
     roomList.innerHTML = '';
-
+    const data = responseJson.examData;
+    
     // Loop through each object in the JSON data array
-    responseJson.forEach(item => {
+    data.forEach(item => {
 
+      uniLog("Exam: ", true);
+      uniLog(item);
       // Create list item element
       const listItem = document.createElement('li');
 
-      const date = new Date(item.date);
+      /* const date = new Date(item.date);
 
       const day = date.getDate().toString().padStart(2, '0');
       const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
       const year = date.getFullYear();
 
-      const formattedDate = `${day}-${month}-${year}`;
+      const formattedDate = `${day}-${month}-${year}`; */
 
+      const date = new Date(item.dateTime)
+ 
+      const minutes =  (date.getMinutes() === 0) ? "00" : date.getMinutes();
+
+      uniLog("api date");
+      uniLog(item.dateTime);
+      uniLog("---------------");
+
+      uniLog("day " + date.getDate() + " month " + (date.getMonth() + 1) +  " year " + date.getFullYear() );
+
+
+     
+      const dateString  = date.getDate() + "-" + (date.getMonth() + 1 ) + "-" + date.getFullYear() + " Ore: " + date.getHours() + ":" + minutes;
       // Populate list item with JSON data
       listItem.innerHTML = `
              <strong>Esame:</strong> <span>${item.examName}</span><br>
-              <strong>Corso di Studi:</strong> <span>${item.course}</span><br>
               <strong>Sede:</strong> <span>${item.location}</span><br>
-              <strong>Giorno:</strong> <span>${formattedDate}</span>
-              <input type="button" id="roomListBtn" class="roomListBtn ${item.idExam}" value="Cancella prenotazione">
+              <strong>Giorno:</strong> <span>${dateString}</span>
+              <input type="button" id="roomListBtn" class="roomListBtn ${item.idexam}" value="Cancella prenotazione">
             
         `;
 
@@ -143,10 +155,10 @@ fetch("http://localhost:3000/getReservations", options)
       document.querySelectorAll(".roomListBtn").forEach(button => {
         console.log(button.classList);
 
-        if (button.classList[1] === `${item.idExam}`) {
+        if (button.classList[1] === `${item.idexam}`) {
           button.addEventListener("click", function (event) {
             event.preventDefault();
-            deleteReservation(item.idExam);
+            deleteReservation(item.idexam);
             return;
           });
         }
@@ -168,7 +180,7 @@ function deleteReservation(data) {
   // Check if the user clicked "OK"
   if (confirmed) {
 
-    fetch(`http://localhost:3000/deleteReservation?date=${data}`, {
+    fetch(`http://localhost:3000/deleteReservation?date=${idexam}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

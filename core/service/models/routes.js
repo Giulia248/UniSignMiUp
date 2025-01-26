@@ -27,6 +27,9 @@ router.put('/UniSignMeUp/v1/changePassword', userController.changePassword);
 // GET all exams
 router.get('/UniSignMeUp/v1/getAllExams', examController.getAllExams);
 
+// GET all exams for single user
+router.get('/UniSignMeUp/v1/getExams', examController.getExams);
+
 // POST a new exam
 router.post('/UniSignMeUp/v1/createExam', examController.createExam);
 
