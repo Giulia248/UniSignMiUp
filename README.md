@@ -25,3 +25,5 @@ https://code.tutsplus.com/it/a-beginners-guide-to-http-and-rest--net-16340t
 
 MYSQL Downoad link (Windows)
 https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-8.0.39.0.msi
+
+<small> always remember not to bandage your head! (non fasciamoci la testa) <\small>
