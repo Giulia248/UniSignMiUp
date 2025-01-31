@@ -31,7 +31,7 @@ app.use('/', examRoutes);
 const port = 2024; // http://localhost:2024/UniSignMeUp/v1/...
 // Start the server and test the database connection
 app.listen(port, async () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`🚀Server running at http://localhost:${port}`);
     try {
         // Execute a simple query to check the connection
         const [rows] = await database.query('SELECT 1'); // 'SELECT 1' is a simple query to test connection
