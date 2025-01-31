@@ -37,9 +37,10 @@ exports.getUser = async (userData) => {
 
     const [result] = await db.query(sql, [email]);
 
-
+    
     if (!result || result.length === 0) {
-        return { success: false };
+
+        return { success: false , errorType: "001" }; // email not valid
     } else {
 
         const passwordUser = result[0].password;
@@ -54,7 +55,7 @@ exports.getUser = async (userData) => {
             return { success: true };
         } else {
 
-            return { success: false };
+            return { success: false , errorType: "002"};
         }
     }
 

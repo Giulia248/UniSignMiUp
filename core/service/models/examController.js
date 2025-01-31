@@ -72,16 +72,16 @@ exports.deleteExam = async (req, res) => {
     try {
         console.log("[Console] Received data:", req.query); // Log to check request body
         const result = await examModel.deleteExam(req.query);
-
+        
         if (result.success) {
             // Send success response with a message
             console.log("✨ [Console] deleteExam successfull");
-            return res.status(200).json({ message: 'deleteExam successful' });
+            return res.status(200).json({ message: "OK" });
             
         } else {
             // Send failure response if credentials are invalid
-            console.log("✨ [Console] deleteExam failed");
-            return res.status(401).json({ message: 'ERROR' });
+            console.log("💀 [Console] deleteExam failed");
+            return res.status(500).json({ errorType: "003" });
         }
         
     } catch (err) {

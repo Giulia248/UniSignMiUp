@@ -1,6 +1,7 @@
 
 
 var checkActiveState = true;
+var responseStatus;
 document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('container');
     const registerBtn = document.getElementById('register');
@@ -14,17 +15,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
- //   document.addEventListener('DOMContentLoaded', function () { ?????? che ci faceva quii?
-        document.getElementById("signUp").addEventListener("click", function (event) {
-            event.preventDefault();
-            
+    //   document.addEventListener('DOMContentLoaded', function () { ?????? che ci faceva quii?
+    document.getElementById("signUp").addEventListener("click", function (event) {
+        event.preventDefault();
 
-            if (getEnvironment() === 3) { // MOCK
-                // mock password safe 36IZe7pHb<p-
-                
-                uniLog("registration")
-                setTimeout(() => {  window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html'; }, 2000);
-            } else {
+
+        if (getEnvironment() === 3) { // MOCK
+            // mock password safe 36IZe7pHb<p-
+
+            uniLog("registration")
+            setTimeout(() => { window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html'; }, 2000);
+        } else {
             // Validazione campi di input
             const nomeInput = document.getElementById('nomeRegistration');
             const cognomeInput = document.getElementById('cognomeRegistration');
@@ -76,24 +77,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify(formData),
             };
 
-             
-                fetch('http://localhost:2024/UniSignMeUp/v1/createUser', options)
-                    .then(data => {
-                        if (!data.ok) {
-                            alert("Errore nella registrazione");
-                            throw Error(data.status);
-                        }
 
+            fetch('http://localhost:2024/UniSignMeUp/v1/createUser', options)
+                .then(data => {
+                    if (!data.ok) {
+                        alert("Errore nella registrazione");
+                        throw Error(data.status);
+                    } else {
+                        localStorage.setItem('studentId', course.studentId);
+                        localStorage.setItem('email', course.email);
+                        localStorage.setItem('name', formData.name);
+                        localStorage.setItem('surname', formData.surname);
+                        localStorage.setItem('course', course.course);
 
                         window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html';
                         return data.json();
-                    });
+                    }
+                });
 
 
-                };
-        });
-    
-  //   });
+        };
+    });
+
+    //   });
 
 
     // LOG IN --------------------------------------------------------------------
@@ -139,25 +145,27 @@ document.addEventListener('DOMContentLoaded', function () {
         if (getEnvironment() === 3) { // MOCK
             // mock password safe 36IZe7pHb<p-
             uniLog("login")
-            setTimeout(() => {  window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html'; }, 2000);
+            setTimeout(() => { window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html'; }, 2000);
 
-            
+
         } else {
 
             fetch(`http://localhost:2024/UniSignMeUp/v1/getUser?email=${email}&password=${password}`, options)
-            .then(response => response.json())
-            .then(responseJson => {
-                    if (!responseJson.name === "" || responseJson.name === null ) {
-                        alert(responseJson.status);
-                        if (responseJson.status == 401) {
-                            alert("password errata");
-                            return;
-                        } else if (responseJson.status == 500) {
-                            alert("Email non valida o non registrata");
-                            return;
-                        }
+                .then(response => {
+                    
+                    responseStatus =  response.status;
+                    return response.json()})
+
+                .then(responseJson => {
+                    uniLog("responseJson")
+                    uniLog(responseJson)
+                    if (responseStatus !== 200 ) {
+
+                        uniErrorType(responseJson.errorType);
+                        return;
                     } else {
-                        
+                        uniLog("Memorizzazione utenza ...")
+                        uniLog(responseJson.email)
                         localStorage.setItem('studentId', responseJson.studentId);
                         localStorage.setItem('email', responseJson.email);
                         localStorage.setItem('name', responseJson.name);

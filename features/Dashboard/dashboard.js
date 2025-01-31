@@ -1,6 +1,7 @@
 // values
 
-var dateSelected
+var dateSelected;
+var responseStatus;
 // user info
 const options = {
   method: 'GET',
@@ -31,11 +32,10 @@ if (getEnvironment() === 3) { // MOCK
   }, 2500);
 
 } else {
-    uniLog("localstorage");
-    uniLog(localStorage.getItem("name"));
-    document.getElementById('name').innerText = localStorage.getItem("name");
-    document.getElementById('email').innerText = localStorage.getItem("email");
-    document.getElementById('course').innerText = localStorage.getItem("course");
+
+  document.getElementById('name').innerText = localStorage.getItem("name");
+  document.getElementById('email').innerText = localStorage.getItem("email");
+  document.getElementById('course').innerText = localStorage.getItem("course");
 };
 
 if (getEnvironment() === 3) {
@@ -98,50 +98,41 @@ if (getEnvironment() === 3) {
   }, 2500);
 }
 else {
-// reservations
-fetch(`http://localhost:2024/UniSignMeUp/v1/getExams?studentId=${localStorage.getItem("studentId")}`, options)
+  // reservations
+  fetch(`http://localhost:2024/UniSignMeUp/v1/getExams?studentId=${localStorage.getItem("studentId")}`, options)
 
-  .then(response => response.json())
-  .then(responseJson => {
+    .then(response => response.json())
+    .then(responseJson => {
 
-    const roomList = document.getElementById('roomList');
+      const roomList = document.getElementById('roomList');
 
-    // Clear existing content
+      // Clear existing content
 
-    roomList.innerHTML = '';
-    const data = responseJson.examData;
-    
-    // Loop through each object in the JSON data array
-    data.forEach(item => {
+      roomList.innerHTML = '';
+      const data = responseJson.examData;
 
-      uniLog("Exam: ", true);
-      uniLog(item);
-      // Create list item element
-      const listItem = document.createElement('li');
+      // Loop through each object in the JSON data array
+      data.forEach(item => {
 
-      /* const date = new Date(item.date);
+        // Create list item element
+        const listItem = document.createElement('li');
 
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
-      const year = date.getFullYear();
+        /* const date = new Date(item.date);
+  
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+        const year = date.getFullYear();
+  
+        const formattedDate = `${day}-${month}-${year}`; */
 
-      const formattedDate = `${day}-${month}-${year}`; */
+        const date = new Date(item.dateTime)
 
-      const date = new Date(item.dateTime)
- 
-      const minutes =  (date.getMinutes() === 0) ? "00" : date.getMinutes();
-
-      uniLog("api date");
-      uniLog(item.dateTime);
-      uniLog("---------------");
-
-      uniLog("day " + date.getDate() + " month " + (date.getMonth() + 1) +  " year " + date.getFullYear() );
+        const minutes = (date.getMinutes() === 0) ? "00" : date.getMinutes();
 
 
-     
-      const dateString  = date.getDate() + "-" + (date.getMonth() + 1 ) + "-" + date.getFullYear() + " Ore: " + date.getHours() + ":" + minutes;
-      // Populate list item with JSON data
-      listItem.innerHTML = `
+        const dateString = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear() + " Ore: " + date.getHours() + ":" + minutes;
+        // Populate list item with JSON data
+        listItem.innerHTML = `
              <strong>Esame:</strong> <span>${item.examName}</span><br>
               <strong>Sede:</strong> <span>${item.location}</span><br>
               <strong>Giorno:</strong> <span>${dateString}</span>
@@ -149,58 +140,64 @@ fetch(`http://localhost:2024/UniSignMeUp/v1/getExams?studentId=${localStorage.ge
             
         `;
 
-      // Append list item to the room list
-      roomList.appendChild(listItem);
+        // Append list item to the room list
+        roomList.appendChild(listItem);
 
-      document.querySelectorAll(".roomListBtn").forEach(button => {
-        console.log(button.classList);
+        document.querySelectorAll(".roomListBtn").forEach(button => {
 
-        if (button.classList[1] === `${item.idexam}`) {
-          button.addEventListener("click", function (event) {
-            event.preventDefault();
-            deleteReservation(item.idexam);
-            return;
-          });
-        }
+          if (button.classList[1] === `${item.idexam}`) {
+            button.addEventListener("click", function (event) {
+              event.preventDefault();
+              deleteReservation(item.idexam);
+              return;
+            });
+          }
+
+        });
 
       });
 
-    });
-
-  })
-  .catch(error => console.error('C`è stato un problema:', error));
+    })
+    .catch(error => console.error('C`è stato un problema:', error));
 
 };
 
 // delete reservation call
-function deleteReservation(data) {
+function deleteReservation(idexam) {
 
   var confirmed = window.confirm("Sei sicuro di voler cancellare la prenotazione?");
 
   // Check if the user clicked "OK"
   if (confirmed) {
 
-    fetch(`http://localhost:3000/deleteReservation?date=${idexam}`, {
+    fetch(`http://localhost:2024/UniSignMeUp/v1/deleteExam?idexam=${idexam}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         // Include any other headers as needed
       },
     })
-      .then(response => {
-        if (response.status === 500) {
-          alert("Qualcosa è andato storto...");
-          throw new Error('Qualcosa è andato storto');
+      .then(response => {   
+        
+        responseStatus = response.status;
+        return response.json()})
+      .then(responseJson => {
+        if (responseStatus !== 200) {
+          uniLog("ENTRA QUI ?")
+          uniErrorType(responseJson.errorType);
+          return;
         }
-        // Handle successful response
-        alert("Prenotazione cancellata!");
-        console.log('DELETE request successful');
-        location.reload();
+        else {
+          alert("Prenotazione completata con successo");
+          location.reload();
+        }
       })
       .catch(error => {
-        console.error('C`è stato un problema :', error);
+        uniLog("GENRICO")
+        uniErrorType(error.message);
       });
   }
+  
 }
 
 // SIDEBAR TOGGLE

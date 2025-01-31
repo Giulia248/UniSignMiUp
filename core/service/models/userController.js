@@ -54,7 +54,7 @@ exports.getUser = async (req, res) => {
         } else {
             // Send failure response if credentials are invalid
             console.log("💀 [Console] getUser failed");
-            return res.status(401).json({ message: 'ERROR' });
+            return res.status(500).json({ errorType: result.errorType });
         }
     } catch (err) {
         console.log("💀 [Console] getUser failed");
