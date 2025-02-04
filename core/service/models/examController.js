@@ -24,10 +24,9 @@ exports.getExams = async (req, res) => {
             const examData = examModel.getExamsData();
             console.log("NOME", examData);
 
-            return res.status(200).json({ examData: examData});
+            return res.status(404).json({ examData: examData});
             
         } else {
-            // Send failure response if credentials are invalid
             console.log("💀 [Console] getExams failed");
             return res.status(401).json({ message: 'ERROR' });
         }
@@ -55,7 +54,7 @@ exports.createExam = async (req, res) => {
         } else {
             // Send failure response if credentials are invalid
             console.log("✨ [Console] createExam failed");
-            return res.status(401).json({ message: 'ERROR' });
+            return res.status(400).json({ message: 'ERROR' });
         }
         
     } catch (err) {
@@ -81,7 +80,7 @@ exports.deleteExam = async (req, res) => {
         } else {
             // Send failure response if credentials are invalid
             console.log("💀 [Console] deleteExam failed");
-            return res.status(500).json({ errorType: "003" });
+            return res.status(404).json({ errorType: "003" });
         }
         
     } catch (err) {
