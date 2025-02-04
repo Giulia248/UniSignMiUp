@@ -84,11 +84,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         alert("Errore nella registrazione");
                         throw Error(data.status);
                     } else {
-                        localStorage.setItem('studentId', course.studentId);
-                        localStorage.setItem('email', course.email);
+                        localStorage.setItem('studentId', formData.studentId);
+                        localStorage.setItem('email', formData.email);
                         localStorage.setItem('name', formData.name);
                         localStorage.setItem('surname', formData.surname);
-                        localStorage.setItem('course', course.course);
+                        localStorage.setItem('course', formData.course);
 
                         window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html';
                         return data.json();
