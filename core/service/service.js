@@ -7,14 +7,13 @@ const userRoutes = require('./models/routes');
 const examRoutes = require('./models/routes');
 const database = require('./database');
 
-
-
 const app = express();
 
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', // Allow only this origin
+    origin: 'http://127.0.0.1:5501', // Allow only this origin
     methods: ['GET', 'OPTIONS', 'POST', 'DELETE', 'PUT'], // Allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers
+    allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Methods', 'Access-Control-Expose-Headers'], // Allowed headers
+    exposedHeaders: ['Content-Type', 'Authorization']
   }));
 
 // Middleware
@@ -24,14 +23,11 @@ app.use(bodyParser.json());
 app.use('/', userRoutes);
 app.use('/', examRoutes);
 
-
-
-
 // Start the server
 const port = 2024; // http://localhost:2024/UniSignMeUp/v1/...
 // Start the server and test the database connection
 app.listen(port, async () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`🚀Server running at http://localhost:${port}`);
     try {
         // Execute a simple query to check the connection
         const [rows] = await database.query('SELECT 1'); // 'SELECT 1' is a simple query to test connection
@@ -43,8 +39,24 @@ app.listen(port, async () => {
 
   });
 
-  // OPTIONS verb, used to 
-app.options('/UniSignMeUp/v1/debugService', (req, res) => {
-    res.set('Allow', 'GET, POST, PUT, DELETE, OPTIONS'); // Specify allowed methods
-    res.status(204).send(); // No content to send back
-  });
+/* app.options('/UniSignMeUp/v1/debugService', (req, res) => {
+
+  console.log("debugService Started ...")
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.status(204).send(); // no content
+}); */
+/* app.options('/UniSignMeUp/v1/debugService', (req, res) => {
+
+  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5502');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  // ✅ This is crucial: it allows the client to read the headers
+  res.setHeader('Access-Control-Expose-Headers', 'Content-Type, Authorization, Access-Control-Allow-Origin, Access-Control-Allow-Methods, Access-Control-Allow-Headers');
+
+  res.status(204).send({data: "OK"}); // No Content
+}); */
+
+app.options('/UniSignMeUp/v1/debugService', cors()); 

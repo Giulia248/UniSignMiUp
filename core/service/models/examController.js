@@ -10,6 +10,36 @@ exports.getAllExams = async (req, res) => {
     }
 };
 
+
+// GET a user
+exports.getExams = async (req, res) => {
+    try {
+        console.log("[Console] Received data:", req.query); // Log to check request body
+        const result = await examModel.getExams(req.query);     
+        console.log("[Console] result", result);   
+
+        if (result.success) {
+            // Send success response with a message
+            console.log("✨ [Console] getExams successfull");
+            const examData = examModel.getExamsData();
+            console.log("NOME", examData);
+
+            return res.status(404).json({ examData: examData});
+            
+        } else {
+            console.log("💀 [Console] getExams failed");
+            return res.status(401).json({ message: 'ERROR' });
+        }
+    } catch (err) {
+        console.log("💀 [Console] getExams failed");
+        console.log(err.message);
+        res.status(500).json({ error: err.message });
+    }
+};
+
+
+
+
 // POST exam
 exports.createExam = async (req, res) => {
     try {
@@ -24,7 +54,7 @@ exports.createExam = async (req, res) => {
         } else {
             // Send failure response if credentials are invalid
             console.log("✨ [Console] createExam failed");
-            return res.status(401).json({ message: 'ERROR' });
+            return res.status(400).json({ message: 'ERROR' });
         }
         
     } catch (err) {
@@ -41,16 +71,16 @@ exports.deleteExam = async (req, res) => {
     try {
         console.log("[Console] Received data:", req.query); // Log to check request body
         const result = await examModel.deleteExam(req.query);
-
+        
         if (result.success) {
             // Send success response with a message
             console.log("✨ [Console] deleteExam successfull");
-            return res.status(200).json({ message: 'deleteExam successful' });
+            return res.status(200).json({ message: "OK" });
             
         } else {
             // Send failure response if credentials are invalid
-            console.log("✨ [Console] deleteExam failed");
-            return res.status(401).json({ message: 'ERROR' });
+            console.log("💀 [Console] deleteExam failed");
+            return res.status(404).json({ errorType: "003" });
         }
         
     } catch (err) {

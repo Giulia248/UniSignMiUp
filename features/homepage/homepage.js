@@ -1,4 +1,4 @@
-(function(doc){
+/* (function(doc){
     var scriptElm = doc.scripts[doc.scripts.length - 1];
     var warn = ['[ionicons] Deprecated script, please remove: ' + scriptElm.outerHTML];
   
@@ -25,5 +25,21 @@
     doc.head.appendChild(scriptElm)
     
     console.warn(warn.join('\n'));
+
+    if (localStorage.getItem("name") === "non fasciamoci la testa") {
+      
+      uniLog("easter egg attivato");
+      document.getElementById("UniSignMiUp").innerHTML = "<img src='http://127.0.0.1:5501/resources/assets/non fasciamoci la testa.gif' >";
+    }
   
-  })(document);
+  })(document); */
+
+
+  uniLog("Nome utente");
+  uniLog(localStorage.getItem("name"));
+  if (localStorage.getItem("name") === "non fasciamoci la testa") {
+      
+    uniLog("easter egg attivato", true);
+    document.getElementById("UniSignMiUp").innerHTML = "<img src='http://127.0.0.1:5501/resources/assets/non fasciamoci la testa.gif' width='500' height='100' >";
+    document.getElementById("easteregg").innerHTML = "<p class= 'easteregg'> Complimenti, hai appena scoperto 1 easter EGG!</p>";
+  }

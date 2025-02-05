@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const resetButton = document.getElementById('resetButton');
+    const togglePasswordNew = document.getElementById('togglePasswordNew');
+    const togglePasswordConfirm = document.getElementById('togglePasswordConfirm');
+
 
     resetButton.addEventListener('click', function (event) {
         event.preventDefault();
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const options = {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -45,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         };
 
-        fetch('http://localhost:3000/modifyPassword', options)
+        fetch('http://localhost:2024/UniSignMeUp/v1/changePassword', options)
             .then(data => {
                 if (!data.ok) {
                     alert("Errore nel cambio password");
@@ -58,16 +61,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Ritorna alla pagina di login dopo un certo periodo di tempo
                 setTimeout(function () {
-                    window.location.href = 'http://127.0.0.1:5500/features/login/login.html';
+                    window.location.href = 'http://127.0.0.1:5501/features/login/login.html';
                 }, 3000); // Ritorna alla pagina di login dopo 3 secondi
             });
     });
-
-
 
     // Funzione per validare la sicurezza della password
     function validatePassword(password) {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&@()*+,.\/:;=?[\]_{}|\\]).{8,256}$/;
         return passwordRegex.test(password);
     }
+
+        // Funzione per mostrare/nascondere la password
+        function togglePasswordVisibility(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+    
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            } else {
+                passwordInput.type = "password";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            }
+        }
+    
+        // Eventi per gli icone degli occhi
+        document.getElementById('resetpassword').addEventListener('click', () => {
+            togglePasswordVisibility('newPassword', 'resetpassword');
+        });
+    
+        document.getElementById('resetpassword2').addEventListener('click', () => {
+            togglePasswordVisibility('confirmNewPassword', 'resetpassword2');
+        });    
 });

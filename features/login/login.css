@@ -1,5 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
+.eye-registration {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(59%);
+    cursor: pointer;
+    color: #333;
+}
+
+/* Occhio per il login */
+.eye-login {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-55%);
+    cursor: pointer;
+    color: #333;
+}
+
+/* Ulteriori modifiche per la gestione della posizione */
+input[type="password"] {
+    padding-right: 30px; /* Aggiungi spazio per l'icona */
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.password-toggle .fas {
+    font-size: 18px;
+}
+
+/* Ad esempio, puoi spostare l'icona della registrazione più a destra */
+.eye-registration {
+    right: -205px;
+}
+
+/* Ad esempio, puoi spostare l'icona del login più a sinistra */
+.eye-login {
+    right: -205px;
+}
+
 /* Stili per il menu a tendina */
 select {
     background-color: #eee;

@@ -25,7 +25,7 @@ exports.createUser = async (req, res) => {
         } else {
             // Send failure response if credentials are invalid
             console.log("✨ [Console] createUser failed");
-            return res.status(401).json({ message: 'ERROR' });
+            return res.status(400).json({ message: 'ERROR' });
         }
         
     } catch (err) {
@@ -45,14 +45,16 @@ exports.getUser = async (req, res) => {
         if (result.success) {
             // Send success response with a message
             console.log("✨ [Console] getUser successfull");
-            const name = userModel.getData();
-            console.log("NOME", name);
-            return res.status(200).json({ message: 'getUser successful' });
+            const userData = userModel.getData();
+            console.log("NOME", userData);
+
+            return res.status(200).json({ studentId: userData.studentId, email : userData.email, 
+                name: userData.name, surname: userData.surname, course: userData.course});
             
         } else {
             // Send failure response if credentials are invalid
             console.log("💀 [Console] getUser failed");
-            return res.status(401).json({ message: 'ERROR' });
+            return res.status(400).json({ errorType: result.errorType });
         }
     } catch (err) {
         console.log("💀 [Console] getUser failed");
@@ -60,7 +62,6 @@ exports.getUser = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
-
 
 // PUT new password
 exports.changePassword = async (req, res) => {
@@ -76,7 +77,7 @@ exports.changePassword = async (req, res) => {
         } else {
             // Send failure response if credentials are invalid
             console.log("✨ [Console] changePassword failed");
-            return res.status(401).json({ message: 'ERROR' });
+            return res.status(400).json({ message: 'ERROR' });
         }
         
     } catch (err) {
