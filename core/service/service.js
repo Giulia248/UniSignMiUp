@@ -24,7 +24,7 @@ app.use('/', userRoutes);
 app.use('/', examRoutes);
 
 // Start the server
-const port = 2024; // http://localhost:2024/UniSignMeUp/v1/...
+const port = 2025; // http://localhost:2024/UniSignMeUp/v1/...
 // Start the server and test the database connection
 app.listen(port, async () => {
     console.log(`🚀Server running at http://localhost:${port}`);
@@ -38,25 +38,5 @@ app.listen(port, async () => {
 
 
   });
-
-/* app.options('/UniSignMeUp/v1/debugService', (req, res) => {
-
-  console.log("debugService Started ...")
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.status(204).send(); // no content
-}); */
-/* app.options('/UniSignMeUp/v1/debugService', (req, res) => {
-
-  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5502');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  // ✅ This is crucial: it allows the client to read the headers
-  res.setHeader('Access-Control-Expose-Headers', 'Content-Type, Authorization, Access-Control-Allow-Origin, Access-Control-Allow-Methods, Access-Control-Allow-Headers');
-
-  res.status(204).send({data: "OK"}); // No Content
-}); */
 
 app.options('/UniSignMeUp/v1/debugService', cors()); 
