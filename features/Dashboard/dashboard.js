@@ -11,10 +11,6 @@ const options = {
 };
 
 
-//fetch("../services/contributors.JSON")
-//.then(res => res.json())
-//.then(data => console.log(data))
-
 if (getEnvironment() === 3) { // MOCK
 
 
@@ -99,7 +95,7 @@ if (getEnvironment() === 3) {
 }
 else {
   // reservations
-  fetch(`http://localhost:2024/UniSignMeUp/v1/getExams?studentId=${localStorage.getItem("studentId")}`, options)
+  fetch(`http://localhost:2024/UniSignMeUp/v2/getExams?studentId=${localStorage.getItem("studentId")}`, options)
 
     .then(response => response.json())
     .then(responseJson => {
