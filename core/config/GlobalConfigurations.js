@@ -3,7 +3,7 @@
 
 const environment = "test"; // could be "test - 1" - "relase - 2" - "mock - 3"
 
-const appVersion = "version: 1.0";
+const appVersion = "version: 1.2";
 
 function uniLog(log, urgent) { // log: string - urgent: bool
     const icon = urgent ? "❗️" : "";

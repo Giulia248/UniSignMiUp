@@ -24,7 +24,7 @@ exports.getExams = async (req, res) => {
             const examData = examModel.getExamsData();
             console.log("NOME", examData);
 
-            return res.status(404).json({ examData: examData});
+            return res.status(200).json({ examData: examData});
             
         } else {
             console.log("💀 [Console] getExams failed");
