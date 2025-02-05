@@ -183,3 +183,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 });
+
+var appVersionString = document.createElement("p");
+appVersionString.innerHTML = appVersion;
+appVersionString.style = "bottom: 0 ;right:0;position:absolute;z-index: 9999; padding: 10px"
+document.body.appendChild(appVersionString);
