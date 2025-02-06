@@ -78,11 +78,15 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
 
-            fetch('http://localhost:2024/UniSignMeUp/v1/createUser', options)
-                .then(data => {
-                    if (!data.ok) {
-                        alert("Errore nella registrazione");
-                        throw Error(data.status);
+            fetch('http://localhost:2024/UniSignMeUp/v2/createUser', options)
+                .then(response => {
+                    responseStatus = response.status;
+                    return response.json()
+                })
+                .then(responseJson => {
+                    if (responseStatus !== 200) {
+                        uniErrorType(responseJson.errorType);
+                        return;
                     } else {
                         localStorage.setItem('studentId', formData.studentId);
                         localStorage.setItem('email', formData.email);
@@ -91,8 +95,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         localStorage.setItem('course', formData.course);
 
                         window.location.href = 'http://127.0.0.1:5501/features/homepage/homepage.html';
-                        return data.json();
                     }
+                })
+                .catch(error => {
+                    uniLog("GENRICO" + error.message)
+                    uniErrorType(error.message);
                 });
 
 
@@ -151,16 +158,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         } else {
 
-            fetch(`http://localhost:2024/UniSignMeUp/v1/getUser?email=${email}&password=${password}`, options)
+            fetch(`http://localhost:2024/UniSignMeUp/v2/getUser?email=${email}&password=${password}`, options)
                 .then(response => {
-                    
-                    responseStatus =  response.status;
-                    return response.json()})
+                    responseStatus = response.status;
+                    return response.json()
+                })
 
                 .then(responseJson => {
                     uniLog("responseJson")
                     uniLog(responseJson)
-                    if (responseStatus !== 200 ) {
+                    if (responseStatus !== 200) {
 
                         uniErrorType(responseJson.errorType);
                         return;
@@ -177,8 +184,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 })
                 .catch(error => {
-                    uniLog("Login js Error", true);
-                    uniLog(error.message, true);
+                    uniLog("GENRICO" + error.message)
+                    uniErrorType(error.message);
                 });
         };
 
@@ -187,27 +194,27 @@ document.addEventListener('DOMContentLoaded', function () {
     function togglePasswordVisibility(inputId, iconId) {
         const passwordInput = document.getElementById(inputId);
         const icon = document.getElementById(iconId);
-    
+
         if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
+            passwordInput.type = "text";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
         } else {
-        passwordInput.type = "password";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
+            passwordInput.type = "password";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
         }
     }
-    
+
     // Eventi per gli icone degli occhi
     document.getElementById('eyeRegistration').addEventListener('click', () => {
         togglePasswordVisibility('passwordRegistration', 'eyeRegistration');
     });
-    
+
     document.getElementById('eyeLogin').addEventListener('click', () => {
         togglePasswordVisibility('passwordLogin', 'eyeLogin');
     });
-    
+
 });
 
 var appVersionString = document.createElement("p");

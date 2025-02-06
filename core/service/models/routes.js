@@ -10,13 +10,13 @@ const examController = require('../models/examController');
 router.get('/UniSignMeUp/v1/getAllUsers', userController.getAllUsers);
 
 // POST a new user
-router.post('/UniSignMeUp/v1/createUser', userController.createUser);
+router.post('/UniSignMeUp/v2/createUser', userController.createUser);
 
 // GET single user
-router.get('/UniSignMeUp/v1/getUser', userController.getUser);
+router.get('/UniSignMeUp/v2/getUser', userController.getUser);
 
 // PUT change user pw
-router.put('/UniSignMeUp/v1/changePassword', userController.changePassword);
+router.put('/UniSignMeUp/v2/changePassword', userController.changePassword);
 
 // DELETE user
 // router.delete('/UniSignMeUp/v1/deleteUser', userController.deleteUser);
@@ -28,13 +28,13 @@ router.put('/UniSignMeUp/v1/changePassword', userController.changePassword);
 router.get('/UniSignMeUp/v1/getAllExams', examController.getAllExams);
 
 // GET all exams for single user
-router.get('/UniSignMeUp/v2/getExams', examController.getExams);
+router.get('/UniSignMeUp/v3/getExams', examController.getExams);
 
 // POST a new exam
-router.post('/UniSignMeUp/v1/createExam', examController.createExam);
+router.post('/UniSignMeUp/v2/createExam', examController.createExam);
 
 // DELETE exam
-router.delete('/UniSignMeUp/v1/deleteExam', examController.deleteExam);
+router.delete('/UniSignMeUp/v2/deleteExam', examController.deleteExam);
 
 module.exports = router;
 

@@ -95,40 +95,39 @@ if (getEnvironment() === 3) {
 }
 else {
   // reservations
-  fetch(`http://localhost:2024/UniSignMeUp/v2/getExams?studentId=${localStorage.getItem("studentId")}`, options)
+  fetch(`http://localhost:2024/UniSignMeUp/v3/getExams?studentId=${localStorage.getItem("studentId")}`, options)
 
-    .then(response => response.json())
+    .then(response => {
+
+      responseStatus = response.status;
+      return response.json()
+    })
     .then(responseJson => {
 
-      const roomList = document.getElementById('roomList');
 
-      // Clear existing content
+      if (responseStatus !== 200) {
+        uniErrorType(responseJson.errorType);
+        return;
+      }
+      else {
 
-      roomList.innerHTML = '';
-      const data = responseJson.examData;
+        const roomList = document.getElementById('roomList');
 
-      // Loop through each object in the JSON data array
-      data.forEach(item => {
+        // Clear existing content
 
-        // Create list item element
-        const listItem = document.createElement('li');
+        roomList.innerHTML = '';
+        const data = responseJson.examData;
 
-        /* const date = new Date(item.date);
-  
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
-        const year = date.getFullYear();
-  
-        const formattedDate = `${day}-${month}-${year}`; */
+        // Loop through each object in the JSON data array
+        data.forEach(item => {
 
-        const date = new Date(item.dateTime)
+          const listItem = document.createElement('li');
+          const date = new Date(item.dateTime)
+          const minutes = (date.getMinutes() === 0) ? "00" : date.getMinutes();
 
-        const minutes = (date.getMinutes() === 0) ? "00" : date.getMinutes();
-
-
-        const dateString = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear() + " Ore: " + date.getHours() + ":" + minutes;
-        // Populate list item with JSON data
-        listItem.innerHTML = `
+          const dateString = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear() + " Ore: " + date.getHours() + ":" + minutes;
+          // Populate list item with JSON data
+          listItem.innerHTML = `
              <strong>Esame:</strong> <span>${item.examName}</span><br>
               <strong>Sede:</strong> <span>${item.location}</span><br>
               <strong>Giorno:</strong> <span>${dateString}</span>
@@ -136,25 +135,28 @@ else {
             
         `;
 
-        // Append list item to the room list
-        roomList.appendChild(listItem);
+          // Append list item to the room list
+          roomList.appendChild(listItem);
 
-        document.querySelectorAll(".roomListBtn").forEach(button => {
+          document.querySelectorAll(".roomListBtn").forEach(button => {
 
-          if (button.classList[1] === `${item.idexam}`) {
-            button.addEventListener("click", function (event) {
-              event.preventDefault();
-              deleteReservation(item.idexam);
-              return;
-            });
-          }
+            if (button.classList[1] === `${item.idexam}`) {
+              button.addEventListener("click", function (event) {
+                event.preventDefault();
+                deleteReservation(item.idexam);
+                return;
+              });
+            }
+
+          });
 
         });
-
-      });
-
+      };
     })
-    .catch(error => console.error('C`è stato un problema:', error));
+    .catch(error => {
+      uniLog("GENRICO" + error.message)
+      uniErrorType(error.message);
+    });
 
 };
 
@@ -166,20 +168,20 @@ function deleteReservation(idexam) {
   // Check if the user clicked "OK"
   if (confirmed) {
 
-    fetch(`http://localhost:2024/UniSignMeUp/v1/deleteExam?idexam=${idexam}`, {
+    fetch(`http://localhost:2024/UniSignMeUp/v2/deleteExam?idexam=${idexam}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         // Include any other headers as needed
       },
     })
-      .then(response => {   
-        
+      .then(response => {
+
         responseStatus = response.status;
-        return response.json()})
+        return response.json()
+      })
       .then(responseJson => {
         if (responseStatus !== 200) {
-          uniLog("ENTRA QUI ?")
           uniErrorType(responseJson.errorType);
           return;
         }
@@ -189,11 +191,11 @@ function deleteReservation(idexam) {
         }
       })
       .catch(error => {
-        uniLog("GENRICO")
+        uniLog("GENRICO" + error.message)
         uniErrorType(error.message);
       });
   }
-  
+
 }
 
 // SIDEBAR TOGGLE

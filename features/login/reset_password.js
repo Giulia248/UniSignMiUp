@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const resetButton = document.getElementById('resetButton');
 
+    var responseStatus;
     resetButton.addEventListener('click', function (event) {
         event.preventDefault();
 
@@ -32,22 +33,31 @@ document.addEventListener('DOMContentLoaded', function () {
             password: newPassword
         };
 
-        fetch('http://localhost:2024/UniSignMeUp/v1/changePassword', {
+        fetch('http://localhost:2024/UniSignMeUp/v2/changePassword', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestBody),
         })
-        .then(response => {
-            if (!response.ok) {
-                alert("Errore nel cambio password");
-                throw new Error(response.status);
-            }
-            document.getElementById('confirmationMessage').style.display = "block";
+            .then(response => {
+                responseStatus = response.status;
+                return response.json()
+            })
+            .then(responseJson => {
+                if (responseStatus !== 200) {
+                    uniErrorType(responseJson.errorType);
+                    return;
+                } else {
+                    document.getElementById('confirmationMessage').style.display = "block";
 
-            setTimeout(() => {
-                window.location.href = 'http://127.0.0.1:5501/features/login/login.html';
-            }, 3000);
-        });
+                    setTimeout(() => {
+                        window.location.href = 'http://127.0.0.1:5501/features/login/login.html';
+                    }, 3000);
+                };
+            })
+            .catch(error => {
+                uniLog("GENRICO" + error.message)
+                uniErrorType(error.message);
+            });
     });
 
     function validatePassword(password) {
