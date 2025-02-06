@@ -11,7 +11,7 @@ exports.getAllExams = async (req, res) => {
 };
 
 
-// GET a user
+// GET exams
 exports.getExams = async (req, res) => {
     try {
         console.log("[Console] Received data:", req.query); // Log to check request body
