@@ -179,8 +179,8 @@ $(function () {
             if (confirmed) {
 
                 const idExam = localStorage.getItem("studentId") + selectedExam.length;
-                const dateTime =  selectedDate + " " + selectedTime;
-                
+                const dateTime = selectedDate + " " + selectedTime;
+
                 var formData = {
                     idexam: idExam,
                     studentId: localStorage.getItem("studentId"),
@@ -196,26 +196,34 @@ $(function () {
                 const options = {
                     method: 'POST',
                     headers: {
-                      'Content-Type': 'application/json',
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData)
-                  };
+                };
 
-                fetch("http://localhost:2024/UniSignMeUp/v1/createExam", options)
+                fetch("http://localhost:2024/UniSignMeUp/v2/createExam", options)
                     .then(response => {
                         if (response.status === 200) {
                             alert("Esame prenotato!");
 
                             // Genera il PDF con i dettagli dell'esame prenotato
                             generatePDF(selectedExam, selectedDate, selectedTime, location, userEmail);
-            
+
                             // Reset campi
                             $('#exam-name').val('');
                             $('#location').val('Seleziona il luogo');
                             $('#date-select').empty().append('<option value="" disabled selected>Seleziona una data</option>');
                             $('#time-select').empty().append('<option value="" disabled selected>Seleziona un orario</option>');
-                        };
-                     });
+                        } else {
+                            uniErrorType(responseJson.errorType);
+                            return;
+                        }
+                    })
+                    .catch(error => {
+                        uniLog("GENRICO" + error.message)
+                        uniErrorType(error.message);
+                    });
+
 
             } else {
                 uniLog("Not confirmed")

@@ -25,13 +25,13 @@ exports.createUser = async (req, res) => {
         } else {
             // Send failure response if credentials are invalid
             console.log("✨ [Console] createUser failed");
-            return res.status(400).json({ message: 'ERROR' });
+            return res.status(400).json({ errorType: "005" });
         }
         
     } catch (err) {
         console.log("💀 [Console] createUser failed");
         console.log(err.message);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ errorType: "008" });
     }
 };
 
@@ -59,7 +59,7 @@ exports.getUser = async (req, res) => {
     } catch (err) {
         console.log("💀 [Console] getUser failed");
         console.log(err.message);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ errorType: "008" });
     }
 };
 
@@ -77,12 +77,12 @@ exports.changePassword = async (req, res) => {
         } else {
             // Send failure response if credentials are invalid
             console.log("✨ [Console] changePassword failed");
-            return res.status(400).json({ message: 'ERROR' });
+            return res.status(400).json({ errorType: "006" });
         }
         
     } catch (err) {
         console.log("💀 [Console] changePassword failed");
         console.log(err.message);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ errorType: "008" });
     }
 };

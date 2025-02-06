@@ -28,16 +28,14 @@ exports.getExams = async (req, res) => {
             
         } else {
             console.log("💀 [Console] getExams failed");
-            return res.status(401).json({ message: 'ERROR' });
+            return res.status(400).json({ errorType: "007" });
         }
     } catch (err) {
         console.log("💀 [Console] getExams failed");
         console.log(err.message);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ errorType: "008" });
     }
 };
-
-
 
 
 // POST exam
@@ -54,13 +52,13 @@ exports.createExam = async (req, res) => {
         } else {
             // Send failure response if credentials are invalid
             console.log("✨ [Console] createExam failed");
-            return res.status(400).json({ message: 'ERROR' });
+            return res.status(400).json({ errorType: "004" });
         }
         
     } catch (err) {
         console.log("💀 [Console] createExam failed");
         console.log(err.message);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ errorType: "008" });
     }
 };
 
@@ -86,6 +84,6 @@ exports.deleteExam = async (req, res) => {
     } catch (err) {
         console.log("💀 [Console] deleteExam failed");
         console.log(err.message);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ errorType: "008" });
     }
 };
